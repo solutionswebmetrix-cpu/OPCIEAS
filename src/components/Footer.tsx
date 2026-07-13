@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowUp, Send, CheckCircle2, Loader2 } from 'lucide-react';
-import { subscribeNewsletter } from '../lib/data';
 
 const cols = [
   { title: 'Company', links: [{ label: 'About', to: '/company/about' }, { label: 'Manufacturing', to: '/company/manufacturing' }, { label: 'Certificates', to: '/company/certifications' }, { label: 'Careers', to: '/company/careers' }, { label: 'Contact', to: '/company/contact' }] },
@@ -15,16 +14,16 @@ export default function Footer() {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'done'>('idle');
 
-  const subscribe = async (e: React.FormEvent) => {
+  const subscribe = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
     setStatus('loading');
-    try {
-      await subscribeNewsletter(email);
-    } catch { /* duplicate email is fine */ }
-    setStatus('done');
-    setEmail('');
-    setTimeout(() => setStatus('idle'), 4000);
+    setTimeout(() => {
+      console.log('Demo mode: Newsletter subscribed', email);
+      setStatus('done');
+      setEmail('');
+      setTimeout(() => setStatus('idle'), 4000);
+    }, 1000);
   };
 
   return (
@@ -49,7 +48,7 @@ export default function Footer() {
               <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter your email" className="flex-1 rounded-full border border-white/15 bg-navy/50 px-5 py-3 font-body text-sm text-white outline-none focus:border-gold" />
               <button type="submit" disabled={status === 'loading'} className="btn-gold flex items-center gap-2 rounded-full px-6 py-3 font-sub text-sm disabled:opacity-60">
                 {status === 'loading' ? <Loader2 className="h-4 w-4 animate-spin" /> : status === 'done' ? <CheckCircle2 className="h-4 w-4" /> : <Send className="h-4 w-4" />}
-                {status === 'done' ? 'Done' : 'Subscribe'}
+                {status === 'done' ? 'Thank you for subscribing.' : 'Subscribe'}
               </button>
             </form>
           </div>

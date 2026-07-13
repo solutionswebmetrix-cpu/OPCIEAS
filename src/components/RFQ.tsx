@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Upload, Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
-import { supabase } from '../lib/supabase';
 
 const categories = [
   'Office Furniture', 'Educational Furniture', 'School Furniture', 'Hostel Furniture',
@@ -19,24 +18,21 @@ export default function RFQ() {
 
   const set = (k: string, v: string) => setForm((p) => ({ ...p, [k]: v }));
 
-  const submit = async (e: React.FormEvent) => {
+  const submit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.contact_name || !form.email) return;
     setStatus('loading');
-    try {
-      const { error } = await supabase.from('rfq_inquiries').insert([form]);
-      if (error) throw error;
+    setTimeout(() => {
+      console.log('Demo mode: RFQ submitted', form);
       setStatus('success');
       setForm({ company_name: '', contact_name: '', email: '', phone: '', country: '', city: '', gst: '', category: '', product: '', quantity: '', budget: '', expected_delivery: '', message: '' });
-    } catch {
-      setStatus('error');
-    }
+    }, 1000);
   };
 
   return (
     <section id="rfq" className="relative overflow-hidden bg-dark py-32">
       <div className="absolute inset-0 grid-bg opacity-20" />
-      <div className="absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-gold/5 blur-[120px]" />
+      <div className="absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-gold/10 blur-[120px]" />
       <div className="container-x relative px-6">
         <div className="mx-auto mb-12 max-w-2xl text-center">
           <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="font-sub text-sm uppercase tracking-[0.3em] text-gold">Request For Quotation</motion.p>
@@ -97,13 +93,13 @@ export default function RFQ() {
 
           <AnimatePresence>
             {status === 'success' && (
-              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="mt-5 flex items-center gap-3 rounded-xl border border-green-400/30 bg-green-400/10 p-4">
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="mt-5 flex items-center gap-3 rounded-xl border border-green-400/30 bg-green-500/10 p-4">
                 <CheckCircle2 className="h-5 w-5 text-green-400" />
-                <p className="font-sub text-sm text-green-300">Thank you! Your request has been received. Our team will contact you within 24 hours.</p>
+                <p className="font-sub text-sm text-green-300">Thank you! Your inquiry has been submitted successfully.</p>
               </motion.div>
             )}
             {status === 'error' && (
-              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="mt-5 flex items-center gap-3 rounded-xl border border-red-400/30 bg-red-400/10 p-4">
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="mt-5 flex items-center gap-3 rounded-xl border border-red-400/30 bg-red-500/10 p-4">
                 <AlertCircle className="h-5 w-5 text-red-400" />
                 <p className="font-sub text-sm text-red-300">Something went wrong. Please try again or contact us directly.</p>
               </motion.div>

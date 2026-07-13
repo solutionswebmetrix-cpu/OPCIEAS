@@ -1,8 +1,6 @@
-
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { MessageSquare, Send, X, Minus, Upload, Loader2, CheckCircle } from 'lucide-react';
-import { supabase } from '../lib/supabase';
 
 type ChatMessage = {
   id: string;
@@ -28,76 +26,50 @@ const quickQuestions = [
   'Contact Sales',
 ];
 
-// OPCIEAS Knowledge Base for Predefined Responses
-const opcieasKnowledge = {
-  about: `OPCIEAS is a leading manufacturer of premium furniture solutions, specializing in Office Furniture, Educational Furniture, Hostel Furniture, Hotel Furniture, Hospital Furniture, Steel Furniture, Industrial Storage, Warehouse Racks, Auditorium Chairs, Cinema Seats, Stadium Chairs, Stainless Steel Wire Racks, Bathroom Storage, and more. We are committed to quality, innovation, and customer satisfaction.`,
-  products: `We manufacture a wide range of furniture categories including:
-• Office Furniture
-• Educational Furniture
-• School Furniture
-• Hostel Furniture
-• Hotel Furniture
-• Hospital Furniture
-• Industrial Storage
-• Steel Furniture
-• Library Furniture
-• Warehouse Racks
-• Auditorium Chairs
-• Play Equipment
-• Commercial Furniture
-• Cinema Seats
-• Stadium Chairs
-• Stainless Steel Wire Racks
-• Bathroom Storage`,
-  governmentTender: `Yes! We specialize in supplying furniture for government tenders. We have extensive experience in government projects and can meet all your requirements. Please fill out the inquiry form for more details.`,
-  export: `Yes, we export our furniture products internationally! We have a dedicated export department to handle global orders. Please fill out the export inquiry form for more details.`,
-  catalogue: `You can download our product catalogue here: /opcieas-catalogue.html. Alternatively, you can request a quote and our team will share the latest catalogue with you.`,
-  quotation: `To request a quotation, please fill out our inquiry form with your requirements, quantity, and contact details. Our sales team will get back to you shortly with a detailed quote.`,
-  certifications: `OPCIEAS maintains high-quality standards and holds various industry certifications. For specific details about our certifications, please contact our sales team or visit our company page.`,
-  factoryLocation: `Our manufacturing facility is located in India. For the exact address and directions, please contact us or visit our contact page.`,
-  industries: `We serve multiple industries including Corporate Offices, Educational Institutions, Hostels, Hotels, Hospitals, Industrial Facilities, Warehouses, Auditoriums, Cinemas, Stadiums, and more.`,
-  contactSales: `You can contact our sales team through the inquiry form, or reach us via phone/email. Our team is available 24/7 to assist you.`,
-  fallback: `I couldn't find the exact information. Please leave your contact details, and our sales team will get back to you shortly.`,
-};
-
 function getAIResponse(userMessage: string): string {
-  const message = userMessage.toLowerCase();
+  const msg = userMessage.toLowerCase();
 
-  if (message.includes('about') || message.includes('tell me') || message.includes('company')) {
-    return opcieasKnowledge.about;
-  }
-  if (message.includes('product') || message.includes('manufactur')) {
-    return opcieasKnowledge.products;
-  }
-  if (message.includes('tender') || message.includes('government')) {
-    return opcieasKnowledge.governmentTender;
-  }
-  if (message.includes('export') || message.includes('international')) {
-    return opcieasKnowledge.export;
-  }
-  if (message.includes('catalogue') || message.includes('catalog')) {
-    return opcieasKnowledge.catalogue;
-  }
-  if (message.includes('quote') || message.includes('quotation') || message.includes('price')) {
-    return opcieasKnowledge.quotation;
-  }
-  if (message.includes('certification') || message.includes('certificate')) {
-    return opcieasKnowledge.certifications;
-  }
-  if (message.includes('factory') || message.includes('location') || message.includes('address')) {
-    return opcieasKnowledge.factoryLocation;
-  }
-  if (message.includes('industry') || message.includes('serve')) {
-    return opcieasKnowledge.industries;
-  }
-  if (message.includes('contact') || message.includes('sales') || message.includes('phone') || message.includes('email')) {
-    return opcieasKnowledge.contactSales;
-  }
-  if (message.includes('quote') || message.includes('quotation') || message.includes('bulk') || message.includes('tender') || message.includes('export') || message.includes('dealer')) {
-    return 'Great! I can help you with that. Please fill out the inquiry form below with your details.';
+  if (msg.includes('hello') || msg.includes('hi')) {
+    return 'Hello! Welcome to OPCIEAS. How can I help you today?';
   }
 
-  return opcieasKnowledge.fallback;
+  if (msg.includes('product') || msg.includes('manufacture') || msg.includes('what do you make')) {
+    return 'OPCIEAS manufactures Office Furniture, Educational Furniture, Hospital Furniture, Industrial Storage, Hostel Furniture, Auditorium Chairs, Stadium Chairs, Play Equipment and Commercial Furniture.';
+  }
+
+  if (msg.includes('export')) {
+    return 'Yes, OPCIEAS supplies products across India and international markets.';
+  }
+
+  if (msg.includes('quote') || msg.includes('quotation') || msg.includes('price') || msg.includes('get a quote')) {
+    return 'Certainly. Please click the Request Quote button or share your requirements here.';
+  }
+
+  if (msg.includes('minimum') || msg.includes('moq')) {
+    return 'We mainly handle bulk orders for institutions, government projects and exports.';
+  }
+
+  if (msg.includes('location') || msg.includes('where are you') || msg.includes('located') || msg.includes('factory') || msg.includes('head office')) {
+    return 'Bangalore, Karnataka, India';
+  }
+
+  if (msg.includes('contact') || msg.includes('phone') || msg.includes('email') || msg.includes('sales')) {
+    return 'Phone: +91 9845579049\nEmail: opcieas.opcieas4@gmail.com';
+  }
+
+  if (msg.includes('tender') || msg.includes('government')) {
+    return 'Yes, OPCIEAS specialises in government tender furniture supply.';
+  }
+
+  if (msg.includes('catalogue') || msg.includes('catalog') || msg.includes('download')) {
+    return 'Sure! You can request a catalogue from our team or download from our website.';
+  }
+
+  if (msg.includes('certification') || msg.includes('certified') || msg.includes('iso')) {
+    return 'OPCIEAS maintains high quality standards and is ISO certified.';
+  }
+
+  return 'Thank you for your query. Our sales team will contact you shortly.';
 }
 
 export default function LiveChatWidget() {
@@ -115,39 +87,12 @@ export default function LiveChatWidget() {
     country: '',
   });
   const [uploadingFile, setUploadingFile] = useState(false);
-  const [conversationId, setConversationId] = useState<string | null>(null);
   const [leadSubmitted, setLeadSubmitted] = useState(false);
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, open]);
-
-  const saveConversation = async () => {
-    if (!conversationId) {
-      const { data, error } = await supabase.from('chat_conversations').insert([{}]).select('id').single();
-      if (!error && data) {
-        setConversationId(data.id);
-        return data.id;
-      }
-      return null;
-    }
-    return conversationId;
-  };
-
-  const saveMessage = async (message: ChatMessage) => {
-    const convId = await saveConversation();
-    if (convId) {
-      await supabase.from('chat_messages').insert([
-        {
-          conversation_id: convId,
-          role: message.role,
-          text: message.text,
-          file_url: message.fileUrl,
-        },
-      ]);
-    }
-  };
 
   const handleSend = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -164,13 +109,11 @@ export default function LiveChatWidget() {
     setInput('');
     setAgentTyping(true);
 
-    await saveMessage(userMessage);
-
     // Check if we need to show lead form
     const keywords = ['quote', 'quotation', 'bulk', 'tender', 'export', 'dealer'];
     const needsLeadForm = keywords.some((k) => trimmed.toLowerCase().includes(k));
 
-    window.setTimeout(async () => {
+    window.setTimeout(() => {
       const aiResponse = getAIResponse(trimmed);
       const agentMessage: ChatMessage = {
         id: `agent-${Date.now()}`,
@@ -178,7 +121,6 @@ export default function LiveChatWidget() {
         text: aiResponse,
       };
       setMessages((prev) => [...prev, agentMessage]);
-      await saveMessage(agentMessage);
 
       if (needsLeadForm) {
         setShowLeadForm(true);
@@ -198,9 +140,7 @@ export default function LiveChatWidget() {
     setMessages((prev) => [...prev, userMessage]);
     setAgentTyping(true);
 
-    await saveMessage(userMessage);
-
-    window.setTimeout(async () => {
+    window.setTimeout(() => {
       const aiResponse = getAIResponse(question);
       const agentMessage: ChatMessage = {
         id: `agent-${Date.now()}`,
@@ -208,7 +148,6 @@ export default function LiveChatWidget() {
         text: aiResponse,
       };
       setMessages((prev) => [...prev, agentMessage]);
-      await saveMessage(agentMessage);
 
       // Check if we need to show lead form
       const keywords = ['quote', 'quotation', 'bulk', 'tender', 'export', 'dealer'];
@@ -226,55 +165,21 @@ export default function LiveChatWidget() {
     if (!file) return;
 
     setUploadingFile(true);
-    try {
-      // Upload to Supabase Storage (we'll use a bucket called 'chat-attachments')
-      const fileName = `${Date.now()}-${file.name}`;
-      const { data, error } = await supabase.storage
-        .from('chat-attachments')
-        .upload(fileName, file);
-
-      if (!error && data) {
-        const { data: urlData } = supabase.storage
-          .from('chat-attachments')
-          .getPublicUrl(data.path);
-
-        const userMessage: ChatMessage = {
-          id: `user-${Date.now()}`,
-          role: 'user',
-          text: `Uploaded file: ${file.name}`,
-          fileUrl: urlData.publicUrl,
-        };
-        setMessages((prev) => [...prev, userMessage]);
-        await saveMessage(userMessage);
-      }
-    } catch {
-      // If storage not set up, just add a message
+    setTimeout(() => {
       const userMessage: ChatMessage = {
         id: `user-${Date.now()}`,
         role: 'user',
         text: `Uploaded file: ${file.name}`,
       };
       setMessages((prev) => [...prev, userMessage]);
-      await saveMessage(userMessage);
-    }
-    setUploadingFile(false);
+      console.log('Demo mode: File uploaded', file.name);
+      setUploadingFile(false);
+    }, 1000);
   };
 
-  const handleLeadSubmit = async (e: FormEvent) => {
+  const handleLeadSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const convId = await saveConversation();
-    if (convId) {
-      await supabase
-        .from('chat_conversations')
-        .update({
-          user_name: leadForm.name,
-          company_name: leadForm.companyName,
-          email: leadForm.email,
-          phone: leadForm.phone,
-          country: leadForm.country,
-        })
-        .eq('id', convId);
-    }
+    console.log('Demo mode: Lead submitted', leadForm);
     setLeadSubmitted(true);
   };
 
@@ -369,7 +274,7 @@ export default function LiveChatWidget() {
               </div>
             </div>
 
-            <div className="flex max-h-[58vh] flex-col gap-4 overflow-hidden rounded-[24px] border border-white/10 bg-[#0D172D]/95 p-4 shadow-inner">
+            <div className="flex max-h-[58vh] flex-col gap-4 overflow-hidden rounded-[24px] border border-white/10 bg-[#0F1C35]/90 p-4 shadow-inner">
               <div className="flex flex-col gap-3 overflow-y-auto pr-1" style={{ maxHeight: 'calc(58vh - 120px)' }}>
                 {messages.map((message) => (
                   <div
@@ -424,13 +329,13 @@ export default function LiveChatWidget() {
                         value={leadForm.name}
                         onChange={(e) => setLeadForm({ ...leadForm, name: e.target.value })}
                         placeholder="Name *"
-                        className="w-full rounded-xl bg-white/5 px-3 py-2 text-sm text-white placeholder-white/30 outline-none ring-1 ring-white/10 transition focus:ring-[#D4AF37]"
+                        className="w-full rounded-xl bg-white/5 px-4 py-3 text-sm text-white placeholder-white/30 outline-none ring-1 ring-white/10 transition focus:ring-[#D4AF37]"
                       />
                       <input
                         value={leadForm.companyName}
                         onChange={(e) => setLeadForm({ ...leadForm, companyName: e.target.value })}
                         placeholder="Company Name"
-                        className="w-full rounded-xl bg-white/5 px-3 py-2 text-sm text-white placeholder-white/30 outline-none ring-1 ring-white/10 transition focus:ring-[#D4AF37]"
+                        className="w-full rounded-xl bg-white/5 px-4 py-3 text-sm text-white placeholder-white/30 outline-none ring-1 ring-white/10 transition focus:ring-[#D4AF37]"
                       />
                       <input
                         required
@@ -438,19 +343,19 @@ export default function LiveChatWidget() {
                         value={leadForm.email}
                         onChange={(e) => setLeadForm({ ...leadForm, email: e.target.value })}
                         placeholder="Email *"
-                        className="w-full rounded-xl bg-white/5 px-3 py-2 text-sm text-white placeholder-white/30 outline-none ring-1 ring-white/10 transition focus:ring-[#D4AF37]"
+                        className="w-full rounded-xl bg-white/5 px-4 py-3 text-sm text-white placeholder-white/30 outline-none ring-1 ring-white/10 transition focus:ring-[#D4AF37]"
                       />
                       <input
                         value={leadForm.phone}
                         onChange={(e) => setLeadForm({ ...leadForm, phone: e.target.value })}
                         placeholder="Phone Number"
-                        className="w-full rounded-xl bg-white/5 px-3 py-2 text-sm text-white placeholder-white/30 outline-none ring-1 ring-white/10 transition focus:ring-[#D4AF37]"
+                        className="w-full rounded-xl bg-white/5 px-4 py-3 text-sm text-white placeholder-white/30 outline-none ring-1 ring-white/10 transition focus:ring-[#D4AF37]"
                       />
                       <input
                         value={leadForm.country}
                         onChange={(e) => setLeadForm({ ...leadForm, country: e.target.value })}
                         placeholder="Country"
-                        className="w-full rounded-xl bg-white/5 px-3 py-2 text-sm text-white placeholder-white/30 outline-none ring-1 ring-white/10 transition focus:ring-[#D4AF37]"
+                        className="w-full rounded-xl bg-white/5 px-4 py-3 text-sm text-white placeholder-white/30 outline-none ring-1 ring-white/10 transition focus:ring-[#D4AF37]"
                       />
                       <button
                         type="submit"

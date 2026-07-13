@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Send, CheckCircle, Loader2 } from 'lucide-react';
-import { submitRFQ } from '../lib/data';
 
 interface Props {
   productName?: string;
@@ -17,23 +16,21 @@ export default function InquiryForm({ productName, category, compact }: Props) {
 
   const set = (k: string, v: string) => setForm((p) => ({ ...p, [k]: v }));
 
-  const submit = async (e: React.FormEvent) => {
+  const submit = (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('loading');
-    try {
-      await submitRFQ(form);
+    setTimeout(() => {
+      console.log('Demo mode: Inquiry submitted', form);
       setStatus('success');
       setForm({ company_name: '', contact_name: '', email: '', phone: '', country: 'India', category: category || '', product: productName || '', quantity: '', message: '' });
-    } catch {
-      setStatus('error');
-    }
+    }, 1000);
   };
 
   if (status === 'success') {
     return (
       <div className="rounded-lux bg-green-500/10 p-8 text-center">
         <CheckCircle className="mx-auto mb-3 h-12 w-12 text-green-400" />
-        <h3 className="font-heading text-lg font-bold text-white">Inquiry Submitted!</h3>
+        <h3 className="font-heading text-lg font-bold text-white">Thank you! Your inquiry has been submitted successfully.</h3>
         <p className="mt-2 font-sub text-sm text-white/60">Our team will contact you within 24 hours.</p>
         <button onClick={() => setStatus('idle')} className="mt-4 rounded-full bg-white/10 px-5 py-2 font-sub text-xs text-white transition hover:bg-white/20">Submit Another</button>
       </div>

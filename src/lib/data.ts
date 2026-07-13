@@ -1,4 +1,3 @@
-import { supabase } from './supabase';
 
 export interface Category {
   id: string;
@@ -78,96 +77,83 @@ export interface Career {
   status: string;
 }
 
+// Mock data
+const mockCategories: Category[] = [
+  { id: '1', slug: 'office-furniture', name: 'Office Furniture', tagline: 'Ergonomic solutions', description: 'Premium office furniture', banner_image: null, icon: null },
+  { id: '2', slug: 'educational-furniture', name: 'Educational Furniture', tagline: 'Classroom essentials', description: 'School furniture', banner_image: null, icon: null },
+  { id: '3', slug: 'hospital-furniture', name: 'Hospital Furniture', tagline: 'Healthcare solutions', description: 'Medical furniture', banner_image: null, icon: null },
+  { id: '4', slug: 'industrial-storage', name: 'Industrial Storage', tagline: 'Warehouse solutions', description: 'Storage systems', banner_image: null, icon: null },
+];
+
+const mockProducts: Product[] = [
+  { id: '1', slug: 'executive-desk', name: 'Executive Desk', category_id: '1', short_desc: 'Premium desk', long_desc: 'High-quality office desk', image: null, gallery: [], specs: {}, features: [], price_range: null, featured: true, created_at: new Date().toISOString() },
+  { id: '2', slug: 'classroom-chair', name: 'Classroom Chair', category_id: '2', short_desc: 'Durable chair', long_desc: 'School furniture', image: null, gallery: [], specs: {}, features: [], price_range: null, featured: false, created_at: new Date().toISOString() },
+];
+
+// Mock functions
 export async function fetchCategories(): Promise<Category[]> {
-  const { data, error } = await supabase.from('categories').select('*').order('name');
-  if (error) throw error;
-  return data ?? [];
+  return mockCategories;
 }
 
 export async function fetchCategory(slug: string): Promise<Category | null> {
-  const { data, error } = await supabase.from('categories').select('*').eq('slug', slug).maybeSingle();
-  if (error) throw error;
-  return data;
+  return mockCategories.find(c => c.slug === slug) || null;
 }
 
 export async function fetchProducts(categoryId?: string): Promise<Product[]> {
-  let q = supabase.from('products').select('*').order('created_at', { ascending: false });
-  if (categoryId) q = q.eq('category_id', categoryId);
-  const { data, error } = await q;
-  if (error) throw error;
-  return data ?? [];
+  if (categoryId) {
+    return mockProducts.filter(p => p.category_id === categoryId);
+  }
+  return mockProducts;
 }
 
 export async function fetchProduct(slug: string): Promise<Product | null> {
-  const { data, error } = await supabase.from('products').select('*').eq('slug', slug).maybeSingle();
-  if (error) throw error;
-  return data;
+  return mockProducts.find(p => p.slug === slug) || null;
 }
 
 export async function fetchFeaturedProducts(): Promise<Product[]> {
-  const { data, error } = await supabase.from('products').select('*').eq('featured', true);
-  if (error) throw error;
-  return data ?? [];
+  return mockProducts.filter(p => p.featured);
 }
 
 export async function fetchIndustries(): Promise<Industry[]> {
-  const { data, error } = await supabase.from('industries').select('*').order('name');
-  if (error) throw error;
-  return data ?? [];
+  return [];
 }
 
 export async function fetchIndustry(slug: string): Promise<Industry | null> {
-  const { data, error } = await supabase.from('industries').select('*').eq('slug', slug).maybeSingle();
-  if (error) throw error;
-  return data;
+  return null;
 }
 
 export async function fetchIndustryProjects(industryId: string): Promise<IndustryProject[]> {
-  const { data, error } = await supabase.from('industry_projects').select('*').eq('industry_id', industryId);
-  if (error) throw error;
-  return data ?? [];
+  return [];
 }
 
 export async function fetchClients(): Promise<Client[]> {
-  const { data, error } = await supabase.from('clients').select('*').order('name');
-  if (error) throw error;
-  return data ?? [];
+  return [];
 }
 
 export async function fetchCertifications(): Promise<Certification[]> {
-  const { data, error } = await supabase.from('certifications').select('*').order('name');
-  if (error) throw error;
-  return data ?? [];
+  return [];
 }
 
 export async function fetchCareers(): Promise<Career[]> {
-  const { data, error } = await supabase.from('careers').select('*').eq('status', 'open').order('posted_date', { ascending: false });
-  if (error) throw error;
-  return data ?? [];
+  return [];
 }
 
 export async function fetchCareer(slug: string): Promise<Career | null> {
-  const { data, error } = await supabase.from('careers').select('*').eq('slug', slug).maybeSingle();
-  if (error) throw error;
-  return data;
+  return null;
 }
 
 export async function submitRFQ(payload: Record<string, string>) {
-  const { error } = await supabase.from('rfq_inquiries').insert([payload]);
-  if (error) throw error;
+  console.log('Demo mode: RFQ submitted', payload);
 }
 
 export async function submitContact(payload: Record<string, string>) {
-  const { error } = await supabase.from('contact_messages').insert([payload]);
-  if (error) throw error;
+  console.log('Demo mode: Contact form submitted', payload);
 }
 
 export async function submitJobApplication(payload: Record<string, string>) {
-  const { error } = await supabase.from('job_applications').insert([payload]);
-  if (error) throw error;
+  console.log('Demo mode: Job application submitted', payload);
 }
 
 export async function subscribeNewsletter(email: string) {
-  const { error } = await supabase.from('newsletter_subscribers').insert([{ email }]);
-  if (error) throw error;
+  console.log('Demo mode: Newsletter subscription for', email);
 }

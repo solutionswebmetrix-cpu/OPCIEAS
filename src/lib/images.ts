@@ -15,9 +15,8 @@ import AuditoriumChairsImg from '../assets/Auditorium Chairs.png';
 // Banner videos (tracked with Git LFS)
 import BannerVid1 from '../assets/banner.mp4';
 import BannerVid2 from '../assets/banner 1.mp4';
-import BannerVid3 from '../assets/banner 2.mp4';
 
-export const BANNER_VIDEOS = [BannerVid1, BannerVid2, BannerVid3];
+export const BANNER_VIDEOS = [BannerVid1, BannerVid2];
 
 // Product asset mapping
 export const PRODUCT_ASSETS: Record<
@@ -45,12 +44,12 @@ export const PRODUCT_ASSETS: Record<
 };
 
 export const IMG = {
-  heroBg: px(3825529, 1920),
+  heroBg: IndustrialStorageImg,
   heroProduct: OfficeFurnitureImg,
 
   aboutFactory: IndustrialStorageImg,
 
-  manufacturingBg: px(3825529, 1920),
+  manufacturingBg: IndustrialStorageImg,
 
   products: Object.fromEntries(
     Object.entries(PRODUCT_ASSETS).map(([name, asset]) => [
@@ -67,19 +66,19 @@ export const IMG = {
 
   industries: {
     Education: EducationalFurnitureImg,
-    Government: px(34672722, 600),
+    Government: OfficeFurnitureImg,
     Corporate: OfficeFurnitureImg,
     Healthcare: HospitalFurnitureImg,
     Hospitality: HotelFurnitureImg,
-    Retail: px(17502245, 600),
+    Retail: OfficeFurnitureImg,
     Warehouses: WarehouseRacksImg,
     Factories: IndustrialStorageImg,
-    Infrastructure: px(16678390, 600),
-    Defence: px(54272, 600),
-    Airports: px(11570539, 600),
-    'Metro Rail': px(5098043, 600),
-    'Smart Cities': px(2246476, 600),
-    Exports: px(34168857, 1200),
+    Infrastructure: IndustrialStorageImg,
+    Defence: OfficeFurnitureImg,
+    Airports: OfficeFurnitureImg,
+    'Metro Rail': EducationalFurnitureImg,
+    'Smart Cities': OfficeFurnitureImg,
+    Exports: IndustrialStorageImg,
   },
 
   gallery: [
@@ -95,8 +94,8 @@ export const IMG = {
     { src: AuditoriumChairsImg, cat: 'Auditorium', h: 'medium' },
   ],
 
-  exportContainer: px(34168857, 1200),
-  exportGlobe: px(8828394, 1200),
+  exportContainer: IndustrialStorageImg,
+  exportGlobe: OfficeFurnitureImg,
 
   testimonials: [
     'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=200',

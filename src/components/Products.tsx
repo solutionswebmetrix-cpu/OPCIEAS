@@ -2,12 +2,12 @@ import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Eye, FileText, Download, ArrowUpRight, RotateCw } from 'lucide-react';
-import { IMG } from '../lib/images';
+import { IMG, PRODUCT_ASSETS } from '../lib/images';
 import Product360Viewer from './Product360Viewer';
 
-const categories = Object.entries(IMG.products).map(([name, v]) => ({ name, ...v }));
+const categories = Object.entries(PRODUCT_ASSETS).map(([name, v]) => ({ name, ...v }));
 
-function ProductCard({ name, img, count, i }: { name: string; img: string; count: number; i: number }) {
+function ProductCard({ name, img, vid, count, i }: { name: string; img?: string; vid?: string; count?: number; i: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const [, setT] = useState({ rx: 0, ry: 0 });
   const onMove = (e: React.MouseEvent) => {
@@ -29,7 +29,19 @@ function ProductCard({ name, img, count, i }: { name: string; img: string; count
       className="group relative aspect-[4/5] overflow-hidden rounded-lux border border-navy/10 bg-white luxury-shadow"
     >
       <Link to={`/product/${name.toLowerCase().replace(/\s+/g, '-')}`}>
-      <img src={img} alt={`${name} by OPCIEAS`} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
+        {vid ? (
+          <video
+            src={vid}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+            loading="lazy"
+          />
+        ) : (
+          <img src={img} alt={`${name} by OPCIEAS`} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
+        )}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/20 to-transparent" />
       <div className="absolute inset-0 flex flex-col justify-end p-5">
         <p className="font-sub text-[10px] uppercase tracking-wider text-gold">{count}+ Products</p>

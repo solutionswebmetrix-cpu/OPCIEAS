@@ -17,9 +17,10 @@ const pages: Record<string, { title: string; tagline: string; image: string; }> 
 
 const aboutContent = {
   about: [
-    'Founded in 2000, OPCIEAS Pvt. Ltd. is a leading manufacturer of commercial furniture based in Faridabad, Haryana. Over 25 years, we have grown from a small workshop to a 200,000 sq ft manufacturing facility serving government, corporate and institutional clients across India and 20+ international markets.',
-    'Our mission is to deliver furniture that combines durability, ergonomics and value — engineered to meet the demands of commercial use. From government tenders to corporate offices, hospitals to hotels, our products are trusted by 500+ organisations.',
-    'We are an ISO 9001 certified company with NSIC, MSME and IEC registrations. Our products are sold on the Government e-Marketplace (GeM) and we are an approved supplier for multiple government departments and PSUs.',
+    'OPCIEAS is a seasoned and successful leader in the industry, known for delivering premium commercial furniture solutions with lasting value.',
+    'The company has grown rapidly through strong production capabilities, design & development expertise, customized solutions and a consistent client-oriented philosophy.',
+    'From government and institutional projects to corporate offices, hotels, hospitals and educational spaces, OPCIEAS combines quality manufacturing with dependable service.',
+    'Our approach is built on innovation, durability, customization and trust — making us a preferred partner for high-performance furniture requirements.',
   ],
   manufacturing: [
     'Our manufacturing facility spans 200,000 sq ft and is equipped with CNC laser cutting machines, CNC bending machines, robotic welding stations, powder coating lines and automated assembly lines. We process over 500 tonnes of steel and engineered wood per month.',
@@ -144,8 +145,8 @@ export default function CompanyPage() {
               <p className="mt-4 font-body text-sm text-navy/60">Have a question or need a quote? Fill out the form and our team will respond within 24 hours.</p>
               <div className="mt-8 space-y-4">
                 <div className="flex items-center gap-3"><div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gold/10 text-gold"><MapPin className="h-5 w-5" /></div><div><p className="font-sub text-xs text-navy/50">Address</p><p className="font-sub text-sm text-navy">OPCIEAS Pvt. Ltd., Faridabad, Haryana, India</p></div></div>
-                <div className="flex items-center gap-3"><div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gold/10 text-gold"><Phone className="h-5 w-5" /></div><div><p className="font-sub text-xs text-navy/50">Phone</p><a href="tel:+919999999999" className="font-sub text-sm text-navy hover:text-gold">+91 99999 99999</a></div></div>
-                <div className="flex items-center gap-3"><div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gold/10 text-gold"><Mail className="h-5 w-5" /></div><div><p className="font-sub text-xs text-navy/50">Email</p><a href="mailto:info@opcieas.com" className="font-sub text-sm text-navy hover:text-gold">info@opcieas.com</a></div></div>
+                <div className="flex items-center gap-3"><div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gold/10 text-gold"><Phone className="h-5 w-5" /></div><div><p className="font-sub text-xs text-navy/50">Contact Person</p><a href="tel:+919845579049" className="font-sub text-sm text-navy hover:text-gold">Ravi • +91 9845579049</a></div></div>
+                <div className="flex items-center gap-3"><div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gold/10 text-gold"><Mail className="h-5 w-5" /></div><div><p className="font-sub text-xs text-navy/50">Email</p><a href="mailto:opcieas.opcieas4@gmail.com" className="font-sub text-sm text-navy hover:text-gold">opcieas.opcieas4@gmail.com</a></div></div>
               </div>
             </div>
             <div className="rounded-lux bg-navy p-8">

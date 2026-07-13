@@ -17,10 +17,11 @@ export default function Contact() {
           {/* Left — info */}
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-5">
             {[
-              { icon: MapPin, title: 'Head Office', lines: ['OPCIEAS Pvt. Ltd.', 'Industrial Area, India'] },
-              { icon: Phone, title: 'Phone', lines: ['+91 98765 43210', '+91 98765 43211'] },
-              { icon: Mail, title: 'Email', lines: ['info@opcieas.com', 'exports@opcieas.com'] },
-              { icon: Clock, title: 'Working Hours', lines: ['Mon - Sat: 9:00 AM - 7:00 PM', 'Emergency support available 24/7'] },
+              { icon: MapPin, title: 'Head Office', lines: ['OPCIEAS Pvt. Ltd.', 'Faridabad, Haryana, India'] },
+              { icon: Phone, title: 'Contact Person', lines: ['Ravi'] },
+              { icon: Phone, title: 'Phone', lines: ['+91 9845579049'] },
+              { icon: Mail, title: 'Websites', lines: ['www.opcieascommercialfurniture.com', 'www.opcieas.com', 'www.opcieas.co'] },
+              { icon: Mail, title: 'Email', lines: ['opcieas.opcieas4@gmail.com'] },
             ].map((c) => (
               <div key={c.title} className="flex items-start gap-4 rounded-lux glass-navy p-5">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gold/10 text-gold"><c.icon className="h-6 w-6" /></div>
@@ -36,15 +37,15 @@ export default function Contact() {
               <p className="mb-3 font-heading text-sm font-bold text-white">Book a Meeting</p>
               <div className="flex flex-wrap gap-2">
                 {[
-                  { icon: Video, label: 'Zoom' },
-                  { icon: Video, label: 'Google Meet' },
-                  { icon: Video, label: 'MS Teams' },
-                  { icon: MessageCircle, label: 'WhatsApp' },
-                  { icon: Calendar, label: 'Factory Visit' },
+                  { icon: MapPin, label: 'Google Maps', href: 'https://maps.google.com/?q=Faridabad+Haryana+India' },
+                  { icon: MessageCircle, label: 'WhatsApp', href: 'https://wa.me/919845579049' },
+                  { icon: Phone, label: 'Call Now', href: 'tel:+919845579049' },
+                  { icon: Mail, label: 'Email', href: 'mailto:opcieas.opcieas4@gmail.com' },
+                  { icon: Calendar, label: 'Request Quote', href: '#rfq' },
                 ].map((m) => (
-                  <button key={m.label} className="flex items-center gap-1.5 rounded-full border border-white/15 px-3 py-1.5 font-sub text-xs text-white/70 transition hover:border-gold hover:text-gold">
+                  <a key={m.label} href={m.href} className="flex items-center gap-1.5 rounded-full border border-white/15 px-3 py-1.5 font-sub text-xs text-white/70 transition hover:border-gold hover:text-gold">
                     <m.icon className="h-3.5 w-3.5" /> {m.label}
-                  </button>
+                  </a>
                 ))}
               </div>
             </div>

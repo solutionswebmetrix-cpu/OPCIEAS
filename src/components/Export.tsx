@@ -2,19 +2,19 @@ import { motion } from 'framer-motion';
 import { Package, Search, Boxes, Ship, Truck, Globe2, Download, UserPlus, Factory } from 'lucide-react';
 
 const flow = [
-  { icon: Factory, label: 'Manufacturing' },
-  { icon: Search, label: 'Quality Inspection' },
-  { icon: Package, label: 'Packaging' },
-  { icon: Boxes, label: 'Container Loading' },
-  { icon: Ship, label: 'Shipping' },
-  { icon: Truck, label: 'Delivery' },
+  { icon: Factory, label: 'Bulk Export' },
+  { icon: Search, label: 'Container Loading' },
+  { icon: Package, label: 'International Supply' },
+  { icon: Boxes, label: 'Institutional Export' },
+  { icon: Ship, label: 'Government Export Projects' },
+  { icon: Truck, label: 'Timely Delivery' },
 ];
 
 const stats = [
-  { label: 'Export Countries', value: '20+' },
-  { label: 'Containers Shipped', value: '500+' },
-  { label: 'Compliance Standards', value: 'ISO, IEC, CE' },
-  { label: 'Global Logistics Partners', value: '15+' },
+  { label: 'Bulk Export Projects', value: '500+' },
+  { label: 'Container Loading', value: '24/7' },
+  { label: 'Institutional Supply', value: '100+' },
+  { label: 'Government Export Projects', value: '50+' },
 ];
 
 const regions = [
@@ -35,7 +35,7 @@ export default function Export() {
         <div className="mx-auto mb-16 max-w-2xl text-center">
           <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="font-sub text-sm uppercase tracking-[0.3em] text-gold">Global Export</motion.p>
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mt-4 font-heading text-3xl font-black text-white sm:text-4xl xl:text-5xl">
-            Exporting to 20+ Countries Worldwide
+            Bulk Export, Container Loading & Institutional Supply
           </motion.h2>
         </div>
 

@@ -3,18 +3,15 @@ import { motion } from 'framer-motion';
 import { Award, FileCheck, Globe, Factory, Boxes, Layers, Tag, Truck, Sparkles, BadgeCheck, HeadsetIcon, ShieldCheck } from 'lucide-react';
 
 const cards = [
-  { icon: Award, title: '25+ Years Experience', desc: 'Two and a half decades of commercial furniture manufacturing expertise.' },
-  { icon: FileCheck, title: 'Government Tender Specialist', desc: 'Approved supplier for government, PSU & institutional tenders.' },
-  { icon: Globe, title: 'Export Ready', desc: 'International compliance, packaging & logistics for 20+ countries.' },
-  { icon: ShieldCheck, title: 'ISO Certified', desc: 'ISO 9001 quality management across every production stage.' },
-  { icon: Factory, title: 'Large Manufacturing Capacity', desc: 'High-volume production for bulk & enterprise-scale orders.' },
-  { icon: Layers, title: 'OEM & ODM', desc: 'Original equipment & design manufacturing for global brands.' },
-  { icon: Tag, title: 'Private Label', desc: 'Build your brand with our manufacturing capability.' },
-  { icon: Boxes, title: 'Bulk Orders', desc: 'Scale from hundreds to thousands of units on schedule.' },
-  { icon: Truck, title: 'Fast Delivery', desc: 'Efficient production & dispatch pipelines across India.' },
-  { icon: Sparkles, title: 'Premium Quality', desc: 'Precision engineering, finishes & materials in every product.' },
-  { icon: BadgeCheck, title: 'Competitive Pricing', desc: 'Factory-direct pricing for tenders & bulk contracts.' },
-  { icon: HeadsetIcon, title: 'Dedicated Support', desc: 'End-to-end project support from RFQ to delivery.' },
+  { icon: Award, title: '25+ Years Experience', desc: 'Decades of expertise in premium commercial furniture manufacturing.' },
+  { icon: FileCheck, title: 'Government Tender Specialist', desc: 'Trusted partner for public sector, PSU and institutional procurement.' },
+  { icon: Globe, title: 'Export Ready', desc: 'Internationally compliant products and export-focused supply solutions.' },
+  { icon: ShieldCheck, title: 'ISO Certified', desc: 'Certified quality processes across every production stage.' },
+  { icon: Factory, title: 'Premium Manufacturing', desc: 'High-capacity production backed by precision engineering and modern facilities.' },
+  { icon: Layers, title: 'Customized Solutions', desc: 'Tailored furniture concepts for campuses, offices, hotels and hospitals.' },
+  { icon: Tag, title: 'Competitive Pricing', desc: 'Factory-direct pricing that supports bulk and tender requirements.' },
+  { icon: Truck, title: 'Timely Delivery', desc: 'Reliable scheduling and dispatch for projects of every scale.' },
+  { icon: HeadsetIcon, title: 'Client Satisfaction', desc: 'End-to-end support from inquiry to installation and beyond.' },
 ];
 
 function TiltCard({ icon: Icon, title, desc, i }: { icon: typeof Award; title: string; desc: string; i: number }) {

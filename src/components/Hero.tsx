@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Download, FileText, Play, ChevronDown, ShieldCheck, Award, Factory, Globe2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
-import { IMG } from '../lib/images';
+import { IMG, BANNER_VIDEOS } from '../lib/images';
 
 const stats = [
   { value: 25, suffix: '+', label: 'Years Experience' },
@@ -42,6 +42,7 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
 export default function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  const [currentBannerIndex, setCurrentBannerIndex] = useState(0);
 
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
@@ -50,19 +51,36 @@ export default function Hero() {
       setMouse({ x: (e.clientX - rect.left - rect.width / 2) / 30, y: (e.clientY - rect.top - rect.height / 2) / 30 });
     };
     window.addEventListener('mousemove', onMove);
-    return () => window.removeEventListener('mousemove', onMove);
+    
+    // Auto-advance banner videos every 5 seconds
+    const interval = setInterval(() => {
+      setCurrentBannerIndex((prev) => (prev + 1) % BANNER_VIDEOS.length);
+    }, 5000);
+    
+    return () => {
+      window.removeEventListener('mousemove', onMove);
+      clearInterval(interval);
+    };
   }, []);
 
   return (
     <section id="hero" ref={heroRef} className="relative min-h-screen overflow-hidden bg-dark">
-      {/* Background image (factory) — preloaded, pointer-events-none */}
+      {/* Background video slider — preloaded, pointer-events-none */}
       <div className="pointer-events-none absolute inset-0">
-        <img
-          src={IMG.heroBg}
-          alt="OPCIEAS commercial furniture manufacturing facility"
-          className="h-full w-full object-cover opacity-40"
-          fetchPriority="high"
-        />
+        {BANNER_VIDEOS.map((video, index) => (
+          <motion.video
+            key={index}
+            src={video}
+            autoPlay
+            muted
+            loop
+            playsInline
+            initial={{ opacity: 0 }}
+            animate={{ opacity: index === currentBannerIndex ? 0.7 : 0 }}
+            transition={{ duration: 1.5, ease: 'easeInOut' }}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        ))}
         <div className="absolute inset-0 bg-gradient-to-r from-dark via-dark/80 to-navy/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-dark via-transparent to-dark/60" />
       </div>
@@ -71,7 +89,7 @@ export default function Hero() {
       <div className="pointer-events-none absolute left-1/4 top-1/4 h-72 w-72 rounded-full bg-gold/10 blur-[100px] animate-float-slow" />
       <div className="pointer-events-none absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-navy-3/40 blur-[120px] animate-float" />
 
-      <div className="container-x relative z-10 grid min-h-screen items-center gap-8 px-6 py-32 lg:grid-cols-[1.1fr_0.9fr]">
+      <div className="container-x relative z-10 flex min-h-screen items-center px-6 py-32">
         {/* Left content */}
         <div className="relative">
           <motion.div
@@ -102,7 +120,7 @@ export default function Hero() {
             transition={{ delay: 1.2, duration: 0.6 }}
             className="mt-4 font-sub text-lg text-white/70"
           >
-            For Government, Corporate & Global Export Projects
+            Commercial Furniture Manufacturer • Government Tender Specialist
           </motion.p>
 
           <motion.p
@@ -111,8 +129,14 @@ export default function Hero() {
             transition={{ delay: 1.4, duration: 0.6 }}
             className="mt-5 max-w-xl font-body text-sm text-white/50"
           >
-            Premium furniture manufacturer. Government tender specialist. Export solutions trusted across India and 20+ international markets.
+            Premium furniture solutions for export, education, hospitality, healthcare and institutional projects across India and global markets.
           </motion.p>
+
+          <div className="mt-5 flex flex-wrap gap-2">
+            {['Commercial Furniture', 'Government Tender', 'Export Furniture', 'Educational Furniture', 'Institutional Furniture'].map((t) => (
+              <span key={t} className="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 font-sub text-xs font-medium text-white/80">{t}</span>
+            ))}
+          </div>
 
           {/* Buttons — always clickable, z-20 */}
           <motion.div
@@ -124,14 +148,11 @@ export default function Hero() {
             <Link to="/products" className="btn-gold magnetic flex items-center gap-2 rounded-full px-6 py-3 font-sub text-sm">
               Explore Products <ArrowRight className="h-4 w-4" />
             </Link>
-            <Link to="/products" className="btn-ghost magnetic flex items-center gap-2 rounded-full px-6 py-3 font-sub text-sm">
-              <Download className="h-4 w-4" /> Catalogue
-            </Link>
             <Link to="/rfq" className="btn-ghost magnetic flex items-center gap-2 rounded-full px-6 py-3 font-sub text-sm">
-              <FileText className="h-4 w-4" /> Request Quotation
+              <FileText className="h-4 w-4" /> Request Quote
             </Link>
-            <Link to="/company/about" className="btn-ghost magnetic flex items-center gap-2 rounded-full px-6 py-3 font-sub text-sm">
-              <Play className="h-4 w-4" /> Company Profile
+            <Link to="/products" className="btn-ghost magnetic flex items-center gap-2 rounded-full px-6 py-3 font-sub text-sm">
+              <Download className="h-4 w-4" /> Download Catalogue
             </Link>
           </motion.div>
 
@@ -149,52 +170,6 @@ export default function Hero() {
                 </p>
                 <p className="mt-1 font-sub text-[10px] uppercase tracking-wider text-white/50">{s.label}</p>
               </div>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* Right — 3D-ish furniture visual */}
-        <div className="relative hidden lg:block" style={{ perspective: 1200 }}>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 1, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="relative mx-auto aspect-square w-full max-w-md"
-            style={{ transform: `rotateY(${mouse.x}deg) rotateX(${-mouse.y}deg)`, transformStyle: 'preserve-3d', transition: 'transform 0.3s' }}
-          >
-            {/* Main furniture image card */}
-            <div className="absolute inset-0 overflow-hidden rounded-lux border border-gold/30 glass-navy luxury-shadow" style={{ transform: 'translateZ(40px)' }}>
-              <img
-                src={IMG.heroProduct}
-                alt="Premium executive office workstation by OPCIEAS"
-                className="h-full w-full object-cover"
-                loading="eager"
-              />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent" />
-            </div>
-            {/* Floating cert cards */}
-            {certs.slice(0, 4).map((c, i) => (
-              <motion.div
-                key={c}
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4 + i, repeat: Infinity, ease: 'easeInOut' }}
-                className="pointer-events-none absolute rounded-xl glass px-3 py-2 font-sub text-[10px] font-medium text-gold"
-                style={{ top: `${10 + i * 18}%`, left: i % 2 === 0 ? '-8%' : 'auto', right: i % 2 === 0 ? 'auto' : '-8%', transform: `translateZ(${60 + i * 10}px)` }}
-              >
-                <ShieldCheck className="mr-1 inline h-3 w-3" /> {c}
-              </motion.div>
-            ))}
-            {/* Floating client logos */}
-            {clients.map((cl, i) => (
-              <motion.div
-                key={cl}
-                animate={{ y: [0, 12, 0] }}
-                transition={{ duration: 5 + i, repeat: Infinity, ease: 'easeInOut' }}
-                className="pointer-events-none absolute rounded-lg glass px-3 py-1.5 font-heading text-xs font-bold text-white/80"
-                style={{ bottom: `${15 + i * 22}%`, left: i === 1 ? '50%' : '-5%', transform: `translateZ(${50 + i * 15}px)` }}
-              >
-                {cl}
-              </motion.div>
             ))}
           </motion.div>
         </div>

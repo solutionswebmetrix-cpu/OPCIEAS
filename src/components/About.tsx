@@ -126,7 +126,7 @@ export default function About() {
             transition={{ duration: 0.6 }}
             className="mt-4 font-heading text-3xl font-black leading-tight text-navy sm:text-4xl xl:text-5xl"
           >
-            Building Commercial Furniture That Shapes Modern Infrastructure
+            Premium Commercial Furniture for Government, Institutional & Export Projects
           </motion.h2>
           <motion.p
             initial={{ opacity: 0 }}
@@ -135,18 +135,18 @@ export default function About() {
             transition={{ delay: 0.2 }}
             className="mt-5 font-body text-base leading-relaxed text-navy/70"
           >
-            OPCIEAS is a premium commercial furniture manufacturer specializing in government projects, educational institutions, corporate offices, hospitals, hotels, industrial storage, warehouse solutions and international export.
+            OPCIEAS is a seasoned and successful leader in the industry, with a rapidly expanding footprint backed by production, design & development, customized solutions and a client-oriented philosophy.
           </motion.p>
-          <div className="mt-6 flex flex-wrap gap-2">
-            {['Government Projects', 'Educational Institutions', 'Corporate Offices', 'Hospitals', 'Hotels', 'Industrial Storage', 'Warehouse Solutions', 'International Export'].map((t) => (
-              <span key={t} className="rounded-full border border-navy/15 bg-navy/5 px-3 py-1.5 font-sub text-xs font-medium text-navy/80">{t}</span>
-            ))}
-          </div>
-          <div className="mt-6 flex flex-wrap gap-4">
-            {['25+ Years Experience', 'ISO Certified', 'Government Approved', 'Trusted by Leading Brands'].map((t) => (
-              <div key={t} className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-gold" />
-                <span className="font-sub text-sm font-medium text-navy">{t}</span>
+          <div className="mt-6 grid gap-3 sm:grid-cols-2">
+            {[
+              { title: 'Company Overview', desc: 'A trusted manufacturer of premium commercial furniture for government, institutional and export clients.' },
+              { title: 'Our Vision', desc: 'To be the preferred partner for durable, elegant and performance-driven furniture solutions.' },
+              { title: 'Our Mission', desc: 'To deliver certified quality, customized products and dependable service across every project.' },
+              { title: 'Why OPCIEAS', desc: 'Deep experience, tender capability, export readiness and a strong commitment to client satisfaction.' },
+            ].map((item) => (
+              <div key={item.title} className="rounded-lux border border-navy/10 bg-navy/5 p-4">
+                <p className="font-heading text-sm font-bold text-navy">{item.title}</p>
+                <p className="mt-1 font-body text-sm text-navy/65">{item.desc}</p>
               </div>
             ))}
           </div>

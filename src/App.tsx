@@ -5,6 +5,7 @@ import Loader from './components/Loader';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
+import LiveChatWidget from './components/LiveChatWidget';
 import HomePage from './pages/HomePage';
 import AllProductsPage from './pages/AllProductsPage';
 import ProductCategoryPage from './pages/ProductCategoryPage';
@@ -49,6 +50,7 @@ export default function App() {
       </main>
       <Footer />
       <WhatsAppButton />
+      <LiveChatWidget />
     </BrowserRouter>
   );
 }

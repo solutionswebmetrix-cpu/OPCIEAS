@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Download, FileText, Play, ChevronDown, ShieldCheck, Award, Factory, Globe2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
-import { IMG, BANNER_VIDEOS } from '../lib/images';
+import { IMG } from '../lib/images';
 
 const stats = [
   { value: 25, suffix: '+', label: 'Years Experience' },
@@ -47,7 +47,6 @@ export default function Hero() {
       {/* Background: banner video */}
       <div className="pointer-events-none absolute inset-0">
         <motion.video
-          src={BANNER_VIDEOS[0]}
           autoPlay
           muted
           loop
@@ -57,7 +56,9 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5, ease: 'easeInOut' }}
           className="absolute inset-0 h-full w-full object-cover"
-        />
+        >
+          <source src="/videos/banner.mp4" type="video/mp4" />
+        </motion.video>
         <div className="absolute inset-0 bg-gradient-to-r from-dark via-dark/60 to-navy/30" />
         <div className="absolute inset-0 bg-gradient-to-t from-dark via-transparent to-dark/40" />
       </div>

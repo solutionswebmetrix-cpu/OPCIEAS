@@ -41,35 +41,23 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
 
 export default function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);
-  const [currentBannerIndex, setCurrentBannerIndex] = useState(0);
-
-  useEffect(() => {
-    // Auto-advance banner videos every 6 seconds
-    const interval = setInterval(() => {
-      setCurrentBannerIndex((prev) => (prev + 1) % BANNER_VIDEOS.length);
-    }, 6000);
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <section id="hero" ref={heroRef} className="relative min-h-screen overflow-hidden bg-dark">
-      {/* Background: banner video slider */}
+      {/* Background: banner video */}
       <div className="pointer-events-none absolute inset-0">
-        {BANNER_VIDEOS.map((video, index) => (
-          <motion.video
-            key={index}
-            src={video}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: index === currentBannerIndex ? 0.8 : 0 }}
-            transition={{ duration: 1.5, ease: 'easeInOut' }}
-            className="absolute inset-0 h-full w-full object-cover"
-          />
-        ))}
+        <motion.video
+          src={BANNER_VIDEOS[0]}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.8 }}
+          transition={{ duration: 1.5, ease: 'easeInOut' }}
+          className="absolute inset-0 h-full w-full object-cover"
+        />
         <div className="absolute inset-0 bg-gradient-to-r from-dark via-dark/80 to-navy/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-dark via-transparent to-dark/60" />
       </div>

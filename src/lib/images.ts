@@ -12,10 +12,8 @@ import LibraryFurnitureImg from '../assets/Library Furniture.png';
 import WarehouseRacksImg from '../assets/Warehouse Racks.png';
 import AuditoriumChairsImg from '../assets/Auditorium Chairs.png';
 
-// Banner videos (tracked with Git LFS)
-import BannerVid1 from '../assets/banner.mp4';
-
-export const BANNER_VIDEOS = [BannerVid1];
+// Banner videos (in public directory)
+export const BANNER_VIDEOS = ['/videos/banner.mp4'];
 
 // Product asset mapping
 export const PRODUCT_ASSETS: Record<

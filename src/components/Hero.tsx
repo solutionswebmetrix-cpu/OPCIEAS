@@ -49,7 +49,7 @@ export default function Hero() {
         <img
           src={IMG.heroBg}
           alt="OPCIEAS commercial furniture manufacturing facility"
-          className="h-full w-full object-cover opacity-7"
+          className="h-full w-full object-cover opacity-70"
           fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-dark via-dark/80 to-navy/40" />

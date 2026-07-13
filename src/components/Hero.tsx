@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Download, FileText, Play, ChevronDown, ShieldCheck, Award, Factory, Globe2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { IMG } from '../lib/images';
 
 const stats = [
@@ -50,7 +50,7 @@ export default function Hero() {
           src={IMG.heroBg}
           alt="OPCIEAS commercial furniture manufacturing facility"
           className="h-full w-full object-cover opacity-70"
-          fetchPriority="high"
+          fetchpriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-dark via-dark/80 to-navy/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-dark via-transparent to-dark/60" />

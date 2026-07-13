@@ -54,12 +54,12 @@ export default function Hero() {
           playsInline
           preload="auto"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.8 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 1.5, ease: 'easeInOut' }}
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-dark via-dark/80 to-navy/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-dark via-transparent to-dark/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-dark via-dark/60 to-navy/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-dark via-transparent to-dark/40" />
       </div>
 
       {/* Floating ambient orbs — decorative, no pointer events */}

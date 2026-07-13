@@ -7,7 +7,7 @@ import Product360Viewer from './Product360Viewer';
 
 const categories = Object.entries(PRODUCT_ASSETS).map(([name, v]) => ({ name, ...v }));
 
-function ProductCard({ name, img, vid, count, i }: { name: string; img?: string; vid?: string; count?: number; i: number }) {
+function ProductCard({ name, img, count, i }: { name: string; img?: string; count?: number; i: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const [, setT] = useState({ rx: 0, ry: 0 });
   const onMove = (e: React.MouseEvent) => {
@@ -29,35 +29,23 @@ function ProductCard({ name, img, vid, count, i }: { name: string; img?: string;
       className="group relative aspect-[4/5] overflow-hidden rounded-lux border border-navy/10 bg-white luxury-shadow"
     >
       <Link to={`/product/${name.toLowerCase().replace(/\s+/g, '-')}`}>
-        {vid ? (
-          <video
-            src={vid}
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-            loading="lazy"
-          />
-        ) : (
-          <img src={img} alt={`${name} by OPCIEAS`} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
-        )}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/20 to-transparent" />
-      <div className="absolute inset-0 flex flex-col justify-end p-5">
-        <p className="font-sub text-[10px] uppercase tracking-wider text-gold">{count}+ Products</p>
-        <h3 className="mt-1 font-heading text-lg font-bold text-white">{name}</h3>
-        <div className="relative z-10 mt-3 flex gap-2 opacity-0 transition-all duration-500 group-hover:opacity-100">
-          <button className="flex items-center gap-1 rounded-full bg-white/15 px-3 py-1.5 font-sub text-xs text-white backdrop-blur transition hover:bg-gold hover:text-navy">
-            <Eye className="h-3 w-3" /> Quick View
-          </button>
-          <button className="flex items-center gap-1 rounded-full bg-white/15 px-3 py-1.5 font-sub text-xs text-white backdrop-blur transition hover:bg-gold hover:text-navy">
-            <Download className="h-3 w-3" /> Catalogue
-          </button>
+        <img src={img} alt={`${name} by OPCIEAS`} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/20 to-transparent" />
+        <div className="absolute inset-0 flex flex-col justify-end p-5">
+          <p className="font-sub text-[10px] uppercase tracking-wider text-gold">{count}+ Products</p>
+          <h3 className="mt-1 font-heading text-lg font-bold text-white">{name}</h3>
+          <div className="relative z-10 mt-3 flex gap-2 opacity-0 transition-all duration-500 group-hover:opacity-100">
+            <button className="flex items-center gap-1 rounded-full bg-white/15 px-3 py-1.5 font-sub text-xs text-white backdrop-blur transition hover:bg-gold hover:text-navy">
+              <Eye className="h-3 w-3" /> Quick View
+            </button>
+            <button className="flex items-center gap-1 rounded-full bg-white/15 px-3 py-1.5 font-sub text-xs text-white backdrop-blur transition hover:bg-gold hover:text-navy">
+              <Download className="h-3 w-3" /> Catalogue
+            </button>
+          </div>
         </div>
-      </div>
-      <div className="pointer-events-none absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full glass text-gold opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-        <ArrowUpRight className="h-4 w-4" />
-      </div>
+        <div className="pointer-events-none absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full glass text-gold opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+          <ArrowUpRight className="h-4 w-4" />
+        </div>
       </Link>
     </motion.div>
   );

@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Download, FileText, Play, ChevronDown, ShieldCheck, Award, Factory, Globe2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
-import { IMG, BANNER_VIDEOS } from '../lib/images';
+import { useEffect, useRef } from 'react';
+import { IMG } from '../lib/images';
 
 const stats = [
   { value: 25, suffix: '+', label: 'Years Experience' },
@@ -41,46 +41,17 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
 
 export default function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);
-  const [mouse, setMouse] = useState({ x: 0, y: 0 });
-  const [currentBannerIndex, setCurrentBannerIndex] = useState(0);
-
-  useEffect(() => {
-    const onMove = (e: MouseEvent) => {
-      const rect = heroRef.current?.getBoundingClientRect();
-      if (!rect) return;
-      setMouse({ x: (e.clientX - rect.left - rect.width / 2) / 30, y: (e.clientY - rect.top - rect.height / 2) / 30 });
-    };
-    window.addEventListener('mousemove', onMove);
-    
-    // Auto-advance banner videos every 5 seconds
-    const interval = setInterval(() => {
-      setCurrentBannerIndex((prev) => (prev + 1) % BANNER_VIDEOS.length);
-    }, 5000);
-    
-    return () => {
-      window.removeEventListener('mousemove', onMove);
-      clearInterval(interval);
-    };
-  }, []);
 
   return (
     <section id="hero" ref={heroRef} className="relative min-h-screen overflow-hidden bg-dark">
-      {/* Background video slider — preloaded, pointer-events-none */}
+      {/* Background image (factory) */}
       <div className="pointer-events-none absolute inset-0">
-        {BANNER_VIDEOS.map((video, index) => (
-          <motion.video
-            key={index}
-            src={video}
-            autoPlay
-            muted
-            loop
-            playsInline
-            initial={{ opacity: 0 }}
-            animate={{ opacity: index === currentBannerIndex ? 0.7 : 0 }}
-            transition={{ duration: 1.5, ease: 'easeInOut' }}
-            className="absolute inset-0 h-full w-full object-cover"
-          />
-        ))}
+        <img
+          src={IMG.heroBg}
+          alt="OPCIEAS commercial furniture manufacturing facility"
+          className="h-full w-full object-cover opacity-7"
+          fetchPriority="high"
+        />
         <div className="absolute inset-0 bg-gradient-to-r from-dark via-dark/80 to-navy/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-dark via-transparent to-dark/60" />
       </div>

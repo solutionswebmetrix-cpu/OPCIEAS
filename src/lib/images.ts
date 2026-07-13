@@ -1,5 +1,5 @@
 
-// Import all local assets (images and videos)
+// Import all local assets (images only)
 import OfficeFurnitureImg from '../assets/Office Furniture.png';
 import EducationalFurnitureImg from '../assets/Educational Furniture.png';
 import SchoolFurnitureImg from '../assets/School Furniture.png';
@@ -12,43 +12,25 @@ import LibraryFurnitureImg from '../assets/Library Furniture.png';
 import WarehouseRacksImg from '../assets/Warehouse Racks.png';
 import AuditoriumChairsImg from '../assets/Auditorium Chairs.png';
 
-// Import all videos
-import OfficeFurnitureVid from '../assets/Office Furniture.mp4';
-import EducationalFurnitureVid from '../assets/Educational Furniture.mp4';
-import SchoolFurnitureVid from '../assets/School Furniture.mp4';
-import HostelFurnitureVid from '../assets/Hostel Furniture.mp4';
-import HotelFurnitureVid from '../assets/Hotel Furniture.mp4';
-import HospitalFurnitureVid from '../assets/Hospital Furniture.mp4';
-import IndustrialStorageVid from '../assets/Industrial Storage.mp4';
-import SteelFurnitureVid from '../assets/Steel Furniture.mp4';
-import LibraryFurnitureVid from '../assets/Library Furniture.mp4';
-import WarehouseRacksVid from '../assets/Warehouse Racks.mp4';
-import AuditoriumChairsVid from '../assets/Auditorium Chairs.mp4';
-
-// Import banner videos
-import BannerVid1 from '../assets/banner.mp4';
-import BannerVid2 from '../assets/banner 1.mp4';
-import BannerVid3 from '../assets/banner 2.mp4';
-
 const px = (id: number, w = 1200) =>
   `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${w}`;
 
 // Product asset mapping
 export const PRODUCT_ASSETS: Record<
   string,
-  { img?: string; vid?: string; count?: number }
+  { img?: string; count?: number }
 > = {
-  'Office Furniture': { img: OfficeFurnitureImg, vid: OfficeFurnitureVid, count: 120 },
-  'Educational Furniture': { img: EducationalFurnitureImg, vid: EducationalFurnitureVid, count: 95 },
-  'School Furniture': { img: SchoolFurnitureImg, vid: SchoolFurnitureVid, count: 30 },
-  'Hostel Furniture': { img: HostelFurnitureImg, vid: HostelFurnitureVid, count: 45 },
-  'Hotel Furniture': { img: HotelFurnitureImg, vid: HotelFurnitureVid, count: 70 },
-  'Hospital Furniture': { img: HospitalFurnitureImg, vid: HospitalFurnitureVid, count: 60 },
-  'Steel Furniture': { img: SteelFurnitureImg, vid: SteelFurnitureVid, count: 90 },
-  'Industrial Storage': { img: IndustrialStorageImg, vid: IndustrialStorageVid, count: 85 },
-  'Warehouse Racks': { img: WarehouseRacksImg, vid: WarehouseRacksVid, count: 40 },
-  'Library Furniture': { img: LibraryFurnitureImg, vid: LibraryFurnitureVid, count: 35 },
-  'Auditorium Chairs': { img: AuditoriumChairsImg, vid: AuditoriumChairsVid, count: 25 },
+  'Office Furniture': { img: OfficeFurnitureImg, count: 120 },
+  'Educational Furniture': { img: EducationalFurnitureImg, count: 95 },
+  'School Furniture': { img: SchoolFurnitureImg, count: 30 },
+  'Hostel Furniture': { img: HostelFurnitureImg, count: 45 },
+  'Hotel Furniture': { img: HotelFurnitureImg, count: 70 },
+  'Hospital Furniture': { img: HospitalFurnitureImg, count: 60 },
+  'Steel Furniture': { img: SteelFurnitureImg, count: 90 },
+  'Industrial Storage': { img: IndustrialStorageImg, count: 85 },
+  'Warehouse Racks': { img: WarehouseRacksImg, count: 40 },
+  'Library Furniture': { img: LibraryFurnitureImg, count: 35 },
+  'Auditorium Chairs': { img: AuditoriumChairsImg, count: 25 },
   'Commercial Furniture': { img: OfficeFurnitureImg, count: 100 },
   'Play Equipment': { img: SchoolFurnitureImg, count: 30 },
   'Letter Boxes': { img: SchoolFurnitureImg, count: 25 },
@@ -57,8 +39,6 @@ export const PRODUCT_ASSETS: Record<
   'Bathroom Storage': { img: IndustrialStorageImg, count: 22 },
   'SS Wire Racks': { img: WarehouseRacksImg, count: 28 },
 };
-
-export const BANNER_VIDEOS = [BannerVid1, BannerVid2, BannerVid3];
 
 export const IMG = {
   heroBg: px(3825529, 1920),
@@ -121,3 +101,4 @@ export const IMG = {
     'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=200',
   ],
 };
+

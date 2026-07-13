@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { IMG, BANNER_VIDEOS } from '../lib/images';
 
-declare const __IS_DEV__: boolean;
-
 const stats = [
   { value: 25, suffix: '+', label: 'Years Experience' },
   { value: 1000, suffix: '+', label: 'Furniture Products' },
@@ -44,52 +42,34 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
 export default function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);
   const [currentBannerIndex, setCurrentBannerIndex] = useState(0);
-  const [localBannerVideos, setLocalBannerVideos] = useState<string[]>(BANNER_VIDEOS);
 
   useEffect(() => {
-    if (!__IS_DEV__) return;
-    // Try to load local banner videos (only exists locally, not in git)
-    import('../lib/local-assets')
-      .then((mod) => setLocalBannerVideos(mod.BANNER_VIDEOS))
-      .catch(() => {}); // Ignore error (file doesn't exist)
-  }, []);
-
-  useEffect(() => {
-    if (localBannerVideos.length === 0) return;
-    // Auto-advance banner videos every 5 seconds
+    // Auto-advance banner videos every 6 seconds
     const interval = setInterval(() => {
-      setCurrentBannerIndex((prev) => (prev + 1) % localBannerVideos.length);
-    }, 5000);
+      setCurrentBannerIndex((prev) => (prev + 1) % BANNER_VIDEOS.length);
+    }, 6000);
     return () => clearInterval(interval);
-  }, [localBannerVideos]);
+  }, []);
 
   return (
     <section id="hero" ref={heroRef} className="relative min-h-screen overflow-hidden bg-dark">
-      {/* Background: video slider if available, else image */}
+      {/* Background: banner video slider */}
       <div className="pointer-events-none absolute inset-0">
-        {localBannerVideos.length > 0 ? (
-          localBannerVideos.map((video, index) => (
-            <motion.video
-              key={index}
-              src={video}
-              autoPlay
-              muted
-              loop
-              playsInline
-              initial={{ opacity: 0 }}
-              animate={{ opacity: index === currentBannerIndex ? 0.7 : 0 }}
-              transition={{ duration: 1.5, ease: 'easeInOut' }}
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-          ))
-        ) : (
-          <img
-            src={IMG.heroBg}
-            alt="OPCIEAS commercial furniture manufacturing facility"
-            className="h-full w-full object-cover opacity-70"
-            fetchpriority="high"
+        {BANNER_VIDEOS.map((video, index) => (
+          <motion.video
+            key={index}
+            src={video}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: index === currentBannerIndex ? 0.8 : 0 }}
+            transition={{ duration: 1.5, ease: 'easeInOut' }}
+            className="absolute inset-0 h-full w-full object-cover"
           />
-        )}
+        ))}
         <div className="absolute inset-0 bg-gradient-to-r from-dark via-dark/80 to-navy/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-dark via-transparent to-dark/60" />
       </div>

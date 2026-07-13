@@ -1,5 +1,5 @@
 
-// Import all local assets (images only)
+// Import all local assets
 import OfficeFurnitureImg from '../assets/Office Furniture.png';
 import EducationalFurnitureImg from '../assets/Educational Furniture.png';
 import SchoolFurnitureImg from '../assets/School Furniture.png';
@@ -12,8 +12,15 @@ import LibraryFurnitureImg from '../assets/Library Furniture.png';
 import WarehouseRacksImg from '../assets/Warehouse Racks.png';
 import AuditoriumChairsImg from '../assets/Auditorium Chairs.png';
 
-const px = (id: number, w = 1200) =>
+// Import banner videos
+import BannerVid1 from '../assets/banner.mp4';
+import BannerVid2 from '../assets/banner 1.mp4';
+import BannerVid3 from '../assets/banner 2.mp4';
+
+const px = (id: number, w: number) =>
   `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${w}`;
+
+export const BANNER_VIDEOS = [BannerVid1, BannerVid2, BannerVid3];
 
 // Product asset mapping
 export const PRODUCT_ASSETS: Record<

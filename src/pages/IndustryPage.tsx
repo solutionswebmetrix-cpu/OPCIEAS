@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Check, MapPin, Calendar } from 'lucide-react';
+import PageMeta from '../components/PageMeta';
 import SectionBanner from '../components/SectionBanner';
 import ProductCard from '../components/ProductCard';
 import InquiryForm from '../components/InquiryForm';
@@ -44,6 +45,11 @@ export default function IndustryPage() {
 
   return (
     <>
+      <PageMeta
+        title={`${ind.name} | OPCIEAS`}
+        description={ind.overview || `Explore ${ind.name} solutions from OPCIEAS, a premium commercial furniture manufacturer serving institutional, corporate and export projects.`}
+        keywords={`${ind.name}, commercial furniture, institutional furniture, export furniture, OPCIEAS`}
+      />
       <SectionBanner title={ind.name} tagline={ind.tagline || ''} image={ind.hero_image || ''} crumb={ind.name} crumbTo={`/industries/${ind.slug}`} />
 
       {/* Overview */}

@@ -4,12 +4,12 @@ import gsap from 'gsap';
 import { IMG } from '../lib/images';
 
 const timeline = [
-  { year: '2000', title: 'Company Started', desc: 'OPCIEAS founded with a vision for premium commercial furniture.' },
-  { year: '2005', title: 'Large Manufacturing Expansion', desc: 'Scaled production capacity with modern machinery and larger facility.' },
-  { year: '2010', title: 'Government Tender Projects', desc: 'Approved supplier for government & institutional furniture tenders.' },
-  { year: '2015', title: 'International Export', desc: 'Began exporting to international markets with global compliance.' },
-  { year: '2020', title: 'Smart Manufacturing', desc: 'Adopted automation, CNC & laser cutting for precision production.' },
-  { year: '2025', title: 'Global Expansion', desc: 'Operating across 20+ export markets with a global dealer network.' },
+  { year: '2000', title: 'Company Started', desc: 'OPCIEAS began with a vision to supply premium commercial furniture to institutional and corporate projects.' },
+  { year: '2005', title: 'Manufacturing Expansion', desc: 'Expanded production capacity with modern equipment and a larger furniture manufacturing facility.' },
+  { year: '2010', title: 'Government Tender Projects', desc: 'Became an approved supplier for government and institutional furniture tenders.' },
+  { year: '2015', title: 'Global Export', desc: 'Started exporting office, school and healthcare furniture to international markets.' },
+  { year: '2020', title: 'Smart Manufacturing', desc: 'Adopted CNC, laser cutting and precision assembly for better quality and repeatability.' },
+  { year: '2025', title: 'Market Leadership', desc: 'Serving 20+ export destinations with trusted delivery and high-volume project execution.' },
 ];
 
 const galleryImages = [
@@ -49,11 +49,13 @@ export default function About() {
       tl.resume();
     }
 
-    return () => tl.kill();
+    return () => {
+      tl.kill();
+    };
   }, [isPaused]);
 
   return (
-    <section id="about" ref={ref} className="relative overflow-hidden bg-white py-32">
+    <section id="overview" ref={ref} style={{ scrollMarginTop: '100px' }} className="relative overflow-hidden bg-white py-32">
       <div className="pointer-events-none absolute right-10 top-20 h-40 w-40 rounded-full border border-navy/10 bg-navy/5 blur-2xl animate-float-slow" />
       <div className="pointer-events-none absolute bottom-20 left-10 h-60 w-60 rounded-full border border-gold/10 bg-gold/5 blur-3xl animate-float" />
 
@@ -135,14 +137,16 @@ export default function About() {
             transition={{ delay: 0.2 }}
             className="mt-5 font-body text-base leading-relaxed text-navy/70"
           >
-            OPCIEAS is a seasoned and successful leader in the industry, with a rapidly expanding footprint backed by production, design & development, customized solutions and a client-oriented philosophy.
+            OPCIEAS is a seasoned and successful leader in the industry, a rapidly expanding company with an impressive track record in production, design, and development. Our innovative team excels in delivering high-performance solutions, offering customized strategies across sales, creative designs, and tailored requirements.
           </motion.p>
           <div className="mt-6 grid gap-3 sm:grid-cols-2">
             {[
-              { title: 'Company Overview', desc: 'A trusted manufacturer of premium commercial furniture for government, institutional and export clients.' },
-              { title: 'Our Vision', desc: 'To be the preferred partner for durable, elegant and performance-driven furniture solutions.' },
-              { title: 'Our Mission', desc: 'To deliver certified quality, customized products and dependable service across every project.' },
-              { title: 'Why OPCIEAS', desc: 'Deep experience, tender capability, export readiness and a strong commitment to client satisfaction.' },
+              { title: 'Who We Are', desc: 'A premium commercial furniture manufacturer for government, institutional, corporate and export clients.' },
+              { title: 'Mission', desc: 'To deliver certified quality, customizable furniture and dependable service on time, every time.' },
+              { title: 'Vision', desc: 'To be the global partner of choice for commercial furniture solutions backed by manufacturing excellence.' },
+              { title: 'Core Values', desc: 'Innovation, quality, reliability, sustainability and customer satisfaction guide every decision.' },
+              { title: 'Infrastructure', desc: 'A modern manufacturing facility with CNC, welding, powder coating, finishing and expert assembly teams.' },
+              { title: 'Government Tender Expertise', desc: 'Tender-ready manufacturing for bulk government, PSU and institutional furniture contracts.' },
             ].map((item) => (
               <div key={item.title} className="rounded-lux border border-navy/10 bg-navy/5 p-4">
                 <p className="font-heading text-sm font-bold text-navy">{item.title}</p>

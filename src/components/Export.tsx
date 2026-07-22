@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Package, Search, Boxes, Ship, Truck, Globe2, Download, UserPlus, Factory } from 'lucide-react';
+import { Package, Search, Boxes, Ship, Truck, Factory } from 'lucide-react';
 
 const flow = [
   { icon: Factory, label: 'Bulk Export' },
@@ -105,10 +105,34 @@ export default function Export() {
           ))}
         </div>
 
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="mt-10 flex flex-wrap justify-center gap-4">
-          <a href="#contact" className="btn-gold flex items-center gap-2 rounded-full px-6 py-3 font-sub text-sm"><UserPlus className="h-4 w-4" /> Become Distributor</a>
-          <a href="#rfq" className="btn-ghost flex items-center gap-2 rounded-full px-6 py-3 font-sub text-sm"><Globe2 className="h-4 w-4" /> Export Inquiry</a>
-          <a href="#catalogue" className="btn-ghost flex items-center gap-2 rounded-full px-6 py-3 font-sub text-sm"><Download className="h-4 w-4" /> Export Profile</a>
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="mt-10 grid gap-4 rounded-lux border border-white/10 bg-white/5 p-6 lg:grid-cols-[1.4fr_0.6fr]">
+          <div>
+            <p className="font-sub text-xs uppercase tracking-[0.3em] text-gold">Business Profile</p>
+            <h3 className="mt-2 font-heading text-2xl font-black text-white">Manufacturer. Exporter. Tender Specialist.</h3>
+            <p className="mt-3 font-body text-sm text-white/60">OPCIEAS is a certified manufacturer, supplier and exporter with deep experience in government tenders, institutional contracts and premium commercial furniture.</p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {[
+                'Manufacturer',
+                'Supplier',
+                'Dealer',
+                'Trader',
+                'Importer',
+                'Exporter',
+                'Government Tender Specialist',
+                'Institutional Supplier',
+                'Export Ready Manufacturer',
+              ].map((item) => (
+                <span key={item} className="rounded-full border border-white/10 bg-navy/10 px-3 py-1.5 text-[11px] text-white/70">{item}</span>
+              ))}
+            </div>
+          </div>
+          <div className="flex items-center justify-center">
+            <div className="grid w-full gap-3">
+              <a href="/contact" className="btn-gold flex items-center justify-center gap-2 rounded-full px-5 py-3 font-sub text-sm">Request Quote</a>
+              <a href="https://wa.me/919845579049" target="_blank" rel="noreferrer" className="btn-ghost flex items-center justify-center gap-2 rounded-full px-5 py-3 font-sub text-sm">WhatsApp Inquiry</a>
+              <a href="/products" className="btn-ghost flex items-center justify-center gap-2 rounded-full px-5 py-3 font-sub text-sm">Download Catalogue</a>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>

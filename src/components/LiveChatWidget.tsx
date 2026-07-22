@@ -18,12 +18,12 @@ const initialMessages: ChatMessage[] = [
 ];
 
 const quickQuestions = [
-  'Get Product Catalogue',
-  'Request Quote',
-  'Government Tender',
+  'Product Inquiry',
+  'Tender Inquiry',
   'Export Inquiry',
-  'Product Information',
-  'Contact Sales',
+  'Quotation',
+  'Dealer',
+  'Distributor',
 ];
 
 function getAIResponse(userMessage: string): string {
@@ -64,7 +64,9 @@ function getAIResponse(userMessage: string): string {
   if (msg.includes('catalogue') || msg.includes('catalog') || msg.includes('download')) {
     return 'Sure! You can request a catalogue from our team or download from our website.';
   }
-
+  if (msg.includes('dealer') || msg.includes('distributor') || msg.includes('partner')) {
+    return 'We support distributor and dealer partnerships. Please share your region and product interest and our team will follow up.';
+  }
   if (msg.includes('certification') || msg.includes('certified') || msg.includes('iso')) {
     return 'OPCIEAS maintains high quality standards and is ISO certified.';
   }

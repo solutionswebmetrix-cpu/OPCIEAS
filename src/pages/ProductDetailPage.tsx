@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { MessageCircle, RotateCw, Check, ChevronLeft, Share2, Phone } from 'lucide-react';
+import { MessageCircle, RotateCw, Check, ChevronLeft, Share2, Phone, Download } from 'lucide-react';
+import PageMeta from '../components/PageMeta';
 import Breadcrumbs from '../components/Breadcrumbs';
 import Product360Viewer from '../components/Product360Viewer';
 import ProductCard from '../components/ProductCard';
@@ -55,6 +56,15 @@ export default function ProductDetailPage() {
 
   return (
     <>
+      {product && (
+        <PageMeta
+          title={`${product.name} | OPCIEAS`}
+          description={product.short_desc || `Premium ${product.name} from OPCIEAS.`}
+          keywords={`${product.name}, commercial furniture, OPCIEAS, ${product.category_id}`}
+          canonical={`https://www.opcieascommercialfurniture.com/product/${product.slug}`}
+          schema={{ '@context': 'https://schema.org', '@type': 'Product', name: product.name, description: product.short_desc || product.long_desc || '' }}
+        />
+      )}
       <section className="bg-navy pt-32">
         <div className="container-x px-6 pb-8">
           <Breadcrumbs items={[{ label: 'Products', to: '/products' }, { label: product.name }]} />
@@ -91,9 +101,10 @@ export default function ProductDetailPage() {
             {/* Actions */}
             <div className="mt-6 flex flex-wrap gap-3">
               <Link to="/rfq" className="btn-gold flex items-center gap-2 rounded-full px-5 py-2.5 font-sub text-sm">Request Quote</Link>
-              <a href={`https://wa.me/919999999999?text=${waText}`} target="_blank" rel="noreferrer" className="flex items-center gap-2 rounded-full bg-[#25D366] px-5 py-2.5 font-sub text-sm text-white"><MessageCircle className="h-4 w-4" /> WhatsApp Inquiry</a>
+              <a href="/products" className="btn-ghost flex items-center gap-2 rounded-full px-5 py-2.5 font-sub text-sm text-white"><Download className="h-4 w-4" /> Download Catalogue</a>
+              <a href={`https://wa.me/919845579049?text=${waText}`} target="_blank" rel="noreferrer" className="flex items-center gap-2 rounded-full bg-[#25D366] px-5 py-2.5 font-sub text-sm text-white"><MessageCircle className="h-4 w-4" /> WhatsApp Inquiry</a>
               <button onClick={() => setViewerOpen(true)} className="btn-ghost flex items-center gap-2 rounded-full px-5 py-2.5 font-sub text-sm"><RotateCw className="h-4 w-4" /> 360° Viewer</button>
-              <a href="tel:+919999999999" className="btn-ghost flex items-center gap-2 rounded-full px-5 py-2.5 font-sub text-sm"><Phone className="h-4 w-4" /> Call</a>
+              <a href="tel:+919845579049" className="btn-ghost flex items-center gap-2 rounded-full px-5 py-2.5 font-sub text-sm"><Phone className="h-4 w-4" /> Call</a>
               <button onClick={() => navigator.share?.({ title: product.name, url: window.location.href }).catch(() => {})} className="btn-ghost flex items-center gap-2 rounded-full px-5 py-2.5 font-sub text-sm"><Share2 className="h-4 w-4" /> Share</button>
             </div>
 
@@ -123,6 +134,17 @@ export default function ProductDetailPage() {
                 </ul>
               </div>
             )}
+
+            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              <div className="rounded-lux border border-white/10 bg-white/5 p-5">
+                <p className="font-heading text-sm font-bold text-white">Applications</p>
+                <p className="mt-2 font-body text-sm text-white/60">Suitable for institutional, commercial, hospitality and export projects. Specific applications available on request.</p>
+              </div>
+              <div className="rounded-lux border border-white/10 bg-white/5 p-5">
+                <p className="font-heading text-sm font-bold text-white">MOQ & Catalogue</p>
+                <p className="mt-2 font-body text-sm text-white/60">Minimum order quantities vary by product and project. Download our catalogue or request a quote for exact details.</p>
+              </div>
+            </div>
           </div>
         </div>
 

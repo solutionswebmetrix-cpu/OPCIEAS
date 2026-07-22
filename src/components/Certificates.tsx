@@ -1,13 +1,13 @@
 import { motion } from 'framer-motion';
-import { ShieldCheck, Award, BadgeCheck, FileCheck, Globe, Crown } from 'lucide-react';
+import { ShieldCheck, Award, BadgeCheck, FileCheck, Globe, Gem } from 'lucide-react';
 
 const certs = [
-  { name: 'ISO 9001:2015', desc: 'Quality Management System', icon: ShieldCheck },
-  { name: 'NSIC', desc: 'National Small Industries Corporation', icon: Award },
-  { name: 'Trademark Registration', desc: 'Registered brand identity', icon: Crown },
-  { name: 'Trust Seals', desc: 'Accepted by institutional and corporate clients', icon: BadgeCheck },
-  { name: 'Government Approvals', desc: 'Approved for public and institutional procurement', icon: FileCheck },
-  { name: 'Export Ready', desc: 'International compliance and export support', icon: Globe },
+  { name: 'ISO 9001:2015', desc: 'Quality Management System certification for manufacturing excellence.', icon: ShieldCheck },
+  { name: 'NSIC', desc: 'National Small Industries Corporation registration for government supplies.', icon: Award },
+  { name: 'MSME UDYAM', desc: 'Official MSME registration for manufacturing enterprises.', icon: FileCheck },
+  { name: 'Trademark Registration', desc: 'Registered OPCIEAS brand identity for commercial products.', icon: Gem },
+  { name: 'IEC', desc: 'Import Export Code for global export operations.', icon: Globe },
+  { name: 'Government Approvals', desc: 'Approved supplier for government and institutional procurement.', icon: BadgeCheck },
 ];
 
 export default function Certificates() {

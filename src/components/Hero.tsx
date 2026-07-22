@@ -1,19 +1,18 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Download, FileText, Play, ChevronDown, ShieldCheck, Award, Factory, Globe2 } from 'lucide-react';
+import { ArrowRight, Download, FileText, ChevronDown, Award, Factory, Globe2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
-import { IMG } from '../lib/images';
 
 const stats = [
   { value: 25, suffix: '+', label: 'Years Experience' },
-  { value: 1000, suffix: '+', label: 'Furniture Products' },
-  { value: 500, suffix: '+', label: 'Institutional Projects' },
-  { value: 100, suffix: '+', label: 'Corporate Clients' },
-  { value: 20, suffix: '+', label: 'Export Markets' },
+  { value: 1, suffix: '', label: 'ISO 9001:2015 Certified' },
+  { value: 500, suffix: '+', label: 'Government Projects' },
+  { value: 1000, suffix: '+', label: 'Bulk Manufacturing' },
+  { value: 20, suffix: '+', label: 'Export Ready' },
+  { value: 50, suffix: '+', label: 'Trusted Brands' },
+  { value: 500, suffix: '+', label: 'Institutional Expertise' },
+  { value: 200, suffix: '+', label: 'Government Tender Specialist' },
 ];
-
-const certs = ['ISO 9001', 'NSIC', 'MSME', 'Trademark', 'IEC', 'Govt. Approved'];
-const clients = ['TATA', 'NOKIA', 'JW Marriott'];
 
 function Counter({ value, suffix }: { value: number; suffix: string }) {
   const [n, setN] = useState(0);
@@ -77,7 +76,7 @@ export default function Hero() {
             className="mb-6 inline-flex items-center gap-2 rounded-full glass px-4 py-2"
           >
             <span className="h-2 w-2 animate-glow rounded-full bg-gold" />
-            <span className="font-sub text-xs tracking-widest text-white/80">MANUFACTURING EXCELLENCE SINCE 2000</span>
+            <span className="font-sub text-xs tracking-widest text-white/80">COMMERCIAL FURNITURE MANUFACTURER SINCE 2000</span>
           </motion.div>
 
           {/* Split-letter headline */}
@@ -87,7 +86,7 @@ export default function Hero() {
             ))}
             <br />
             <span className="gold-text">
-              {'Manufacturing'.split('').map((c, i) => (
+              {'Manufacturer Since 2000'.split('').map((c, i) => (
                 <motion.span key={i} initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 + i * 0.03, duration: 0.5 }} className="inline-block">{c === ' ' ? '\u00A0' : c}</motion.span>
               ))}
             </span>
@@ -98,7 +97,7 @@ export default function Hero() {
             transition={{ delay: 1.2, duration: 0.6 }}
             className="mt-4 font-sub text-lg text-white/70"
           >
-            Commercial Furniture Manufacturer • Government Tender Specialist
+            Trusted manufacturer of premium commercial, institutional and export furniture with certified quality and bulk delivery capability.
           </motion.p>
 
           <motion.p
@@ -107,11 +106,11 @@ export default function Hero() {
             transition={{ delay: 1.4, duration: 0.6 }}
             className="mt-5 max-w-xl font-body text-sm text-white/50"
           >
-            Premium furniture solutions for export, education, hospitality, healthcare and institutional projects across India and global markets.
+            Premium furniture solutions for offices, education, hospitality, healthcare and institutional projects across India and global markets.
           </motion.p>
 
           <div className="mt-5 flex flex-wrap gap-2">
-            {['Commercial Furniture', 'Government Tender', 'Export Furniture', 'Educational Furniture', 'Institutional Furniture'].map((t) => (
+            {['25+ Years Experience', 'ISO 9001:2015 Certified', 'Government Tender Specialist', 'Export Ready', 'Trusted by TATA, NOKIA, JW Marriott', 'Bulk Manufacturing', 'Institutional Projects'].map((t) => (
               <span key={t} className="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 font-sub text-xs font-medium text-white/80">{t}</span>
             ))}
           </div>

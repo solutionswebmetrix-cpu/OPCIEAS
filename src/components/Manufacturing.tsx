@@ -53,7 +53,7 @@ export default function Manufacturing() {
   const lineScale = useTransform(scrollYProgress, [0.1, 0.9], [0, 1]);
 
   return (
-    <section id="manufacturing" ref={ref} className="relative overflow-hidden bg-navy py-32">
+    <section id="manufacturing" ref={ref} style={{ scrollMarginTop: '100px' }} className="relative overflow-hidden bg-navy py-32">
       {/* Video-like background image */}
       <div className="pointer-events-none absolute inset-0">
         <img

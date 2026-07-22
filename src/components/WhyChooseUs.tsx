@@ -1,17 +1,15 @@
 import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Award, FileCheck, Globe, Factory, Boxes, Layers, Tag, Truck, Sparkles, BadgeCheck, HeadsetIcon, ShieldCheck } from 'lucide-react';
+import { Award, Globe, Layers, Truck, Sparkles, BadgeCheck, ShieldCheck } from 'lucide-react';
 
 const cards = [
-  { icon: Award, title: '25+ Years Experience', desc: 'Decades of expertise in premium commercial furniture manufacturing.' },
-  { icon: FileCheck, title: 'Government Tender Specialist', desc: 'Trusted partner for public sector, PSU and institutional procurement.' },
-  { icon: Globe, title: 'Export Ready', desc: 'Internationally compliant products and export-focused supply solutions.' },
-  { icon: ShieldCheck, title: 'ISO Certified', desc: 'Certified quality processes across every production stage.' },
-  { icon: Factory, title: 'Premium Manufacturing', desc: 'High-capacity production backed by precision engineering and modern facilities.' },
-  { icon: Layers, title: 'Customized Solutions', desc: 'Tailored furniture concepts for campuses, offices, hotels and hospitals.' },
-  { icon: Tag, title: 'Competitive Pricing', desc: 'Factory-direct pricing that supports bulk and tender requirements.' },
-  { icon: Truck, title: 'Timely Delivery', desc: 'Reliable scheduling and dispatch for projects of every scale.' },
-  { icon: HeadsetIcon, title: 'Client Satisfaction', desc: 'End-to-end support from inquiry to installation and beyond.' },
+  { icon: Sparkles, title: 'Innovation', desc: 'Forward-thinking furniture solutions with design-led manufacturing and product engineering.' },
+  { icon: ShieldCheck, title: 'High Quality', desc: 'Premium materials, certified processes and rigorous inspection for every product.' },
+  { icon: Award, title: 'Client Satisfaction', desc: 'Trusted by corporate, hospitality, government and educational clients for repeat partnerships.' },
+  { icon: BadgeCheck, title: 'Competitive Pricing', desc: 'Value-driven pricing for bulk orders, tenders and institutional projects.' },
+  { icon: Truck, title: 'Timely Delivery', desc: 'Reliable scheduling, logistics and supply chain support for every order.' },
+  { icon: Layers, title: 'Customization', desc: 'Tailored furniture systems and finishes matched to project requirements.' },
+  { icon: Globe, title: 'High Resale Value', desc: 'Durable, premium finishes that retain asset value over years of use.' },
 ];
 
 function TiltCard({ icon: Icon, title, desc, i }: { icon: typeof Award; title: string; desc: string; i: number }) {
@@ -50,7 +48,7 @@ function TiltCard({ icon: Icon, title, desc, i }: { icon: typeof Award; title: s
 
 export default function WhyChooseUs() {
   return (
-    <section id="why" className="relative overflow-hidden bg-dark py-32">
+    <section id="why-choose-us" style={{ scrollMarginTop: '100px' }} className="relative overflow-hidden bg-dark py-32">
       <div className="absolute inset-0 grid-bg opacity-40" />
       <div className="absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-gold/5 blur-[120px]" />
       <div className="container-x relative px-6">

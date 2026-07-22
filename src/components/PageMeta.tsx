@@ -5,10 +5,11 @@ interface PageMetaProps {
   description: string;
   keywords?: string;
   image?: string;
+  canonical?: string;
   schema?: Record<string, unknown>;
 }
 
-export default function PageMeta({ title, description, keywords, image, schema }: PageMetaProps) {
+export default function PageMeta({ title, description, keywords, image, canonical, schema }: PageMetaProps) {
   useEffect(() => {
     document.title = title;
 
@@ -32,6 +33,16 @@ export default function PageMeta({ title, description, keywords, image, schema }
     setMeta('twitter:description', description, 'name');
     if (image) setMeta('twitter:image', image, 'name');
 
+    const existingCanonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    if (existingCanonical) {
+      if (canonical) existingCanonical.href = canonical;
+    } else if (canonical) {
+      const link = document.createElement('link');
+      link.rel = 'canonical';
+      link.href = canonical;
+      document.head.appendChild(link);
+    }
+
     document.querySelectorAll('script[data-page-schema]').forEach((el) => el.remove());
     if (schema) {
       const script = document.createElement('script');
@@ -40,7 +51,7 @@ export default function PageMeta({ title, description, keywords, image, schema }
       script.textContent = JSON.stringify(schema);
       document.head.appendChild(script);
     }
-  }, [title, description, keywords, image, schema]);
+  }, [title, description, keywords, image, schema, canonical]);
 
   return null;
 }

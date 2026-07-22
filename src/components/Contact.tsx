@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Clock, MessageCircle, Video, Calendar } from 'lucide-react';
+import { MapPin, Phone, Mail, MessageCircle, Video, Calendar } from 'lucide-react';
 
 export default function Contact() {
   return (
@@ -20,8 +20,9 @@ export default function Contact() {
               { icon: MapPin, title: 'Head Office', lines: ['OPCIEAS Pvt. Ltd.', 'Faridabad, Haryana, India'] },
               { icon: Phone, title: 'Contact Person', lines: ['Ravi'] },
               { icon: Phone, title: 'Phone', lines: ['+91 9845579049'] },
-              { icon: Mail, title: 'Websites', lines: ['www.opcieascommercialfurniture.com', 'www.opcieas.com', 'www.opcieas.co'] },
               { icon: Mail, title: 'Email', lines: ['opcieas.opcieas4@gmail.com'] },
+              { icon: Video, title: 'Websites', lines: ['www.opcieascommercialfurniture.com', 'www.opcieas.com', 'www.opcieas.co'] },
+              { icon: Calendar, title: 'Business Hours', lines: ['Mon - Sat: 09:00 AM - 06:00 PM', 'Sun: Closed'] },
             ].map((c) => (
               <div key={c.title} className="flex items-start gap-4 rounded-lux glass-navy p-5">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gold/10 text-gold"><c.icon className="h-6 w-6" /></div>
@@ -34,14 +35,15 @@ export default function Contact() {
 
             {/* Meeting options */}
             <div className="rounded-lux glass-navy p-5">
-              <p className="mb-3 font-heading text-sm font-bold text-white">Book a Meeting</p>
+              <p className="mb-3 font-heading text-sm font-bold text-white">Instant Support</p>
               <div className="flex flex-wrap gap-2">
                 {[
-                  { icon: MapPin, label: 'Google Maps', href: 'https://maps.google.com/?q=Faridabad+Haryana+India' },
+                  { icon: MapPin, label: 'Google Maps', href: 'https://maps.google.com/?q=OPCIEAS%20Faridabad%20Haryana%20India' },
                   { icon: MessageCircle, label: 'WhatsApp', href: 'https://wa.me/919845579049' },
                   { icon: Phone, label: 'Call Now', href: 'tel:+919845579049' },
                   { icon: Mail, label: 'Email', href: 'mailto:opcieas.opcieas4@gmail.com' },
-                  { icon: Calendar, label: 'Request Quote', href: '#rfq' },
+                  { icon: Calendar, label: 'Request Quote', href: '/rfq' },
+                  { icon: Video, label: 'Live Chat', href: '/contact' },
                 ].map((m) => (
                   <a key={m.label} href={m.href} className="flex items-center gap-1.5 rounded-full border border-white/15 px-3 py-1.5 font-sub text-xs text-white/70 transition hover:border-gold hover:text-gold">
                     <m.icon className="h-3.5 w-3.5" /> {m.label}
@@ -54,23 +56,15 @@ export default function Contact() {
           {/* Right — map + quick form */}
           <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-5">
             <div className="overflow-hidden rounded-lux glass-navy">
-              <div className="relative h-64 bg-navy-2">
-                <div className="absolute inset-0 blueprint-bg opacity-60" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <MapPin className="mx-auto h-12 w-12 text-gold" />
-                    <p className="mt-2 font-sub text-sm text-white/70">Interactive Map</p>
-                    <p className="font-body text-xs text-white/40">Industrial Area, India</p>
-                  </div>
-                </div>
-                <div className="absolute left-1/2 top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2">
-                  <span className="absolute -inset-3 animate-glow rounded-full bg-gold/40" />
-                  <span className="relative block h-4 w-4 rounded-full bg-gold" />
-                </div>
-              </div>
+              <iframe
+                title="OPCIEAS Location"
+                src="https://maps.google.com/maps?q=OPCIEAS%20Faridabad%20Haryana%20India&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                className="h-64 w-full border-0"
+                loading="lazy"
+              />
             </div>
 
-            <form onSubmit={(e) => { e.preventDefault(); window.location.hash = '#rfq'; }} className="rounded-lux glass-navy p-6">
+            <form onSubmit={(e) => { e.preventDefault(); window.location.href = '/rfq'; }} className="rounded-lux glass-navy p-6">
               <p className="mb-4 font-heading text-sm font-bold text-white">Quick Contact</p>
               <div className="grid gap-3 sm:grid-cols-2">
                 <input placeholder="Name" className="rounded-xl border border-white/10 bg-navy/50 px-4 py-3 font-body text-sm text-white outline-none focus:border-gold" />

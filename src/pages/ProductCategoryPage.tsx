@@ -2,43 +2,77 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Search, Download, MessageCircle, Boxes } from 'lucide-react';
+import PageMeta from '../components/PageMeta';
 import SectionBanner from '../components/SectionBanner';
 import ProductCard from '../components/ProductCard';
 import InquiryForm from '../components/InquiryForm';
 import { fetchCategory, fetchProducts, type Product, type Category } from '../lib/data';
 
 const categoryContent: Record<string, { overview: string; highlights: string[]; specs: Array<{ label: string; value: string }>; gallery: string[]; cta: string[] }> = {
-  'stainless-steel-products': {
-    overview: 'Premium stainless steel storage and display solutions designed for department stores, libraries, medical stores and commercial environments.',
-    highlights: ['Department Storage Display Rack', '200 Kg Capacity', 'Chrome Finish', 'Double Side Access', 'Easy Cleaning'],
-    specs: [
-      { label: 'Use Case', value: 'Department Stores, Medical Stores, Libraries, Electrical Shops, Stationery Shops, Commercial Storage' },
-      { label: 'Finish', value: 'Chrome finish with durable stainless steel construction' },
-      { label: 'Access', value: 'Double side access for easy retrieval and display' },
-    ],
-    gallery: ['Storage display rack', 'Commercial shelving setup', 'Retail and institutional use'],
-    cta: ['Request Quote', 'Download Catalogue'],
-  },
-  'bathroom-storage': {
-    overview: 'Elegant and rust-resistant bathroom storage with premium finishes, waterproof mirrors and compact dimensions suited for modern interiors.',
-    highlights: ['3 Shelf Stainless Steel Rack', 'Marine Grade Finish', 'Rust Resistant', 'Heart Shaped Waterproof Mirrors', 'Premium Bathroom Storage'],
-    specs: [
-      { label: 'Product Dimensions', value: 'H 24 x W 18 x D 10 Inches' },
-      { label: 'Finish', value: 'Marine grade stainless steel finish' },
-      { label: 'Use', value: 'Bathrooms, hotels, premium residential and hospitality projects' },
-    ],
-    gallery: ['Bathroom storage rack', 'Waterproof mirror and shelving', 'Premium vanity storage'],
-    cta: ['Request Quote', 'Download Catalogue'],
-  },
   'hostel-furniture': {
     overview: 'Robust and durable hostel furniture for student accommodation, dormitories and institutional living spaces.',
-    highlights: ['Single Cot', 'Double Bunk', 'Triple Bunk', 'Mattresses', 'Pillows', 'Bedsheets', 'Duvets', 'Foam Mattress', 'Latex Mattress', 'Rubberized Coir Mattress'],
+    highlights: ['Single Cot', 'Two Tier Bunk Bed', 'Three Tier Steel Cot', 'Commercial Mattress', 'Pillow', 'Premium Bed Sheets', 'Duvet', 'Blanket', 'Hostel Accessories'],
     specs: [
-      { label: 'Suitability', value: 'Hostels, student housing, training centres and institutions' },
-      { label: 'Comfort', value: 'Mattress and bedding options available for every bench and bunk' },
-      { label: 'Build', value: 'Durable powder-coated steel and engineered comfort materials' },
+      { label: 'Suitability', value: 'Hostels, dormitories, student housing and residential institutions' },
+      { label: 'Build', value: 'Powder-coated steel frames with durable bedding textile finishes' },
+      { label: 'Comfort', value: 'Mattress, pillow and linen options for institutional comfort and long-term use' },
     ],
-    gallery: ['Dormitory bunk layout', 'Hostel bed and mattress range', 'Institutional furniture installation'],
+    gallery: ['Hostel dormitory setup', 'Bunk beds and mattresses', 'Hostel bedding accessories'],
+    cta: ['Request Quote', 'WhatsApp Inquiry'],
+  },
+  'school-furniture': {
+    overview: 'School furniture designed for classrooms, libraries, laboratories and administration with safety, durability and student comfort.',
+    highlights: ['Classroom Furniture', 'Student Desk', 'Student Chair', 'Teacher Table', 'Teacher Chair', 'Laboratory Furniture', 'Library Furniture', 'Book Rack', 'Storage Cabinet', 'Display Rack'],
+    specs: [
+      { label: 'Suitability', value: 'Schools, colleges, coaching centres and institutional campuses' },
+      { label: 'Materials', value: 'Powder-coated steel, engineered wood and durable laminated surfaces' },
+      { label: 'Design', value: 'Ergonomic, space-efficient and easy to maintain' },
+    ],
+    gallery: ['Classroom furniture set', 'Library shelving and study areas', 'Laboratory furniture and racks'],
+    cta: ['Request Quote', 'Download Catalogue'],
+  },
+  'bathroom-collection': {
+    overview: 'Premium bathroom collection featuring waterproof mirrors, rust-resistant racks and compact storage solutions for modern commercial washrooms.',
+    highlights: ['Bathroom Storage Rack', 'Waterproof Mirror', 'Heart Shape Mirror', 'Premium Stainless Steel Rack', 'Marine Grade SS Rack'],
+    specs: [
+      { label: 'Finish', value: 'Marine grade stainless steel and premium polished coatings' },
+      { label: 'Protection', value: 'Waterproof, rust-resistant and corrosion-proof design' },
+      { label: 'Use', value: 'Hotels, hospitals, hostels, apartments and premium bathrooms' },
+    ],
+    gallery: ['Bathroom storage design', 'Waterproof mirror display', 'Premium stainless steel bathroom rack'],
+    cta: ['Request Quote', 'Download Catalogue'],
+  },
+  'letter-boxes': {
+    overview: 'Premium letter boxes for apartments, societies and office entrances, available in ABS plastic, metal and wood finishes.',
+    highlights: ['ABS Plastic Letter Box', 'Metal Letter Box', 'Wooden Letter Box', 'Apartment Letter Box', 'Society Letter Box'],
+    specs: [
+      { label: 'Material Options', value: 'ABS Plastic, Metal and Wood' },
+      { label: 'Applications', value: 'Residential societies, apartments, offices and gated communities' },
+      { label: 'Design', value: 'Secure, weatherproof and premium finish options' },
+    ],
+    gallery: ['Apartment letter box systems', 'Stylish metal and wooden letter boxes', 'Society mail solutions'],
+    cta: ['Request Quote', 'Download Catalogue'],
+  },
+  'premium-seating': {
+    overview: 'Premium seating solutions for auditoriums, cinemas and stadiums with comfort, durability and superior design.',
+    highlights: ['Auditorium Chairs', 'Cinema Seats', 'Stadium Chairs', 'Premium Comfort', 'Durable Upholstery'],
+    specs: [
+      { label: 'Applications', value: 'Auditoriums, cinema halls and stadiums' },
+      { label: 'Materials', value: 'Steel frames, upholstered seating and weather-resistant finishes' },
+      { label: 'Features', value: 'Ergonomic comfort, cup holders and folding mechanisms' },
+    ],
+    gallery: ['Auditorium seating models', 'Cinema seat layout', 'Stadium chair installations'],
+    cta: ['Request Quote', 'Download Catalogue'],
+  },
+  'play-equipment': {
+    overview: 'Durable play equipment for schools, parks and residential communities built for safety and long-lasting use.',
+    highlights: ['Slides', 'Swings', 'Climbing Frames', 'Play Structures', 'Outdoor Activity Equipment'],
+    specs: [
+      { label: 'Suitability', value: 'Schools, parks, societies and community centres' },
+      { label: 'Materials', value: 'HDPE, steel and UV-protected finishes' },
+      { label: 'Safety', value: 'Child-safe design with durable, weather-resistant construction' },
+    ],
+    gallery: ['Playground equipment', 'School play area installations', 'Outdoor activity structures'],
     cta: ['Request Quote', 'Download Catalogue'],
   },
   'office-furniture': {
@@ -61,28 +95,6 @@ const categoryContent: Record<string, { overview: string; highlights: string[]; 
       { label: 'Range', value: 'Desks, racks, lockers and play equipment available' },
     ],
     gallery: ['Classroom furniture range', 'Library storage and display', 'Educational interiors'],
-    cta: ['Request Quote', 'Download Catalogue'],
-  },
-  'auditorium': {
-    overview: 'Premium auditorium, cinema and stadium seating built for comfort, appearance and long-term use.',
-    highlights: ['Cinema Chairs', 'Auditorium Chairs', 'Stadium Chairs', 'Premium Cushion Seating', 'Multiple Colors'],
-    specs: [
-      { label: 'Applications', value: 'Auditoriums, cinemas and sports arenas' },
-      { label: 'Finish', value: 'Premium upholstery with durable frame construction' },
-      { label: 'Customization', value: 'Multiple color options and seating configurations' },
-    ],
-    gallery: ['Auditorium seating arrangement', 'Cinema style chair lineup', 'Stadium seating concept'],
-    cta: ['Request Quote', 'Download Catalogue'],
-  },
-  'letter-boxes': {
-    overview: 'Elegant letter boxes available in ABS plastic, metal and wood finish options for offices and institutional entrances.',
-    highlights: ['ABS Plastic', 'Metal', 'Wooden', 'Elegant Designs'],
-    specs: [
-      { label: 'Options', value: 'Plastic, metal and wooden letter boxes' },
-      { label: 'Suitability', value: 'Corporate offices, institutional buildings and residential complexes' },
-      { label: 'Design', value: 'Premium and refined finishes for modern entryways' },
-    ],
-    gallery: ['Elegant letter box designs', 'Institutional entrance solutions', 'Material finish options'],
     cta: ['Request Quote', 'Download Catalogue'],
   },
 };
@@ -136,6 +148,13 @@ export default function ProductCategoryPage() {
 
   return (
     <>
+      <PageMeta
+        title={`${cat.name} | OPCIEAS`}
+        description={cat.description || `Premium ${cat.name} products from OPCIEAS for commercial, institutional and export applications.`}
+        keywords={`${cat.name}, commercial furniture, ${cat.name.toLowerCase()}, OPCIEAS`}
+        canonical={`https://www.opcieascommercialfurniture.com/products/${cat.slug}`}
+        schema={{ '@context': 'https://schema.org', '@type': 'Product', name: cat.name, description: cat.description }}
+      />
       <SectionBanner title={cat.name} tagline={cat.tagline || ''} image={cat.banner_image || ''} crumb={cat.name} crumbTo={`/products/${cat.slug}`} />
 
       <section className="bg-white py-20">
@@ -205,7 +224,7 @@ export default function ProductCategoryPage() {
                 <option value="name">A-Z</option>
               </select>
               <Link to="/rfq" className="btn-ghost flex items-center gap-2 rounded-full px-4 py-2.5 font-sub text-sm text-navy"><Download className="h-4 w-4" /> Catalogue</Link>
-              <a href={`https://wa.me/919999999999?text=I'm%20interested%20in%20${encodeURIComponent(cat.name)}`} target="_blank" rel="noreferrer" className="flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-2.5 font-sub text-sm text-white"><MessageCircle className="h-4 w-4" /> WhatsApp</a>
+              <a href={`https://wa.me/919845579049?text=I'm%20interested%20in%20${encodeURIComponent(cat.name)}`} target="_blank" rel="noreferrer" className="flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-2.5 font-sub text-sm text-white"><MessageCircle className="h-4 w-4" /> WhatsApp</a>
             </div>
           </div>
 

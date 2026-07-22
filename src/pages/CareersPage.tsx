@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Briefcase, MapPin, Clock, ArrowRight, Upload, Send, Loader2, CheckCircle, Check, ChevronLeft, Mail } from 'lucide-react';
 import SectionBanner from '../components/SectionBanner';
+import { IMG } from '../lib/images';
 import { fetchCareers, fetchCareer, submitJobApplication, type Career } from '../lib/data';
 
 export default function CareersPage() {
@@ -41,7 +42,7 @@ export default function CareersPage() {
 
   return (
     <>
-      <SectionBanner title="Careers" tagline="Join the OPCIEAS team" image="https://images.pexels.com/photos/31112184/pexels-photo-31112184.jpeg?auto=compress&cs=tinysrgb&w=1600" crumb="Careers" crumbTo="/company/careers" />
+      <SectionBanner title="Careers" tagline="Join the OPCIEAS team" image={IMG.heroBg} crumb="Careers" crumbTo="/company/careers" />
 
       {/* Job listings or detail */}
       <section className="bg-white py-20">

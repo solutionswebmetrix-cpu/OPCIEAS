@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowUp, Send, CheckCircle2, Loader2 } from 'lucide-react';
+import companyLogo from '../assets/logo/logo.png';
 
 const cols = [
-  { title: 'Company', links: [{ label: 'About', to: '/company/about' }, { label: 'Manufacturing', to: '/company/manufacturing' }, { label: 'Certificates', to: '/company/certifications' }, { label: 'Careers', to: '/company/careers' }, { label: 'Contact', to: '/company/contact' }] },
+  { title: 'Company', links: [{ label: 'About', to: '/company/about' }, { label: 'Manufacturing', to: '/company/manufacturing' }, { label: 'Certifications', to: '/company/certifications' }, { label: 'Careers', to: '/company/careers' }, { label: 'Contact', to: '/company/contact' }] },
   { title: 'Products', links: [{ label: 'Office Furniture', to: '/products/office-furniture' }, { label: 'Educational', to: '/products/educational-furniture' }, { label: 'Hospital', to: '/products/hospital-furniture' }, { label: 'Industrial', to: '/products/industrial-storage' }, { label: 'All Products', to: '/products' }] },
-  { title: 'Industries', links: [{ label: 'Government', to: '/industries/government' }, { label: 'Corporate', to: '/industries/corporate' }, { label: 'Healthcare', to: '/industries/healthcare' }, { label: 'Hospitality', to: '/industries/hospitality' }, { label: 'Export', to: '/industries/export' }] },
-  { title: 'Resources', links: [{ label: 'Request Quote', to: '/rfq' }, { label: 'Tender Catalogue', to: '/products' }, { label: 'Export Profile', to: '/industries/export' }, { label: 'Certificates', to: '/company/certifications' }, { label: 'Contact', to: '/company/contact' }] },
+  { title: 'Industries', links: [{ label: 'Furniture', to: '/furniture' }, { label: 'Technology', to: '/technology' }, { label: 'Agriculture & Fisheries', to: '/agriculture' }, { label: 'Social Services', to: '/social-services' }, { label: 'Government', to: '/industries/government' }, { label: 'Corporate', to: '/industries/corporate' }, { label: 'Healthcare', to: '/industries/healthcare' }, { label: 'Hospitality', to: '/industries/hospitality' }, { label: 'Export', to: '/industries/export' }] },
+  { title: 'Compliance & Legal', links: [{ label: 'Compliance', to: '/compliance' }, { label: 'Terms of Use', to: '/terms-of-use' }, { label: 'Privacy Policy', to: '/privacy-policy' }, { label: 'Disclaimer', to: '/disclaimer' }, { label: 'Sitemap', to: '/' }] },
+  { title: 'Resources', links: [{ label: 'Request Quote', to: '/rfq' }, { label: 'Tender Catalogue', to: '/products' }, { label: 'Export Profile', to: '/industries/export' }, { label: 'Certifications', to: '/company/certifications' }, { label: 'Contact', to: '/company/contact' }] },
 ];
 
 export default function Footer() {
@@ -59,7 +61,9 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-gold/40 bg-navy/60 font-heading text-2xl font-black gold-text">O</div>
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-gold/40 bg-navy/60">
+                <img src={companyLogo} alt="OPCIEAS logo" className="h-full w-full object-contain" />
+              </div>
               <div>
                 <p className="font-heading text-xl font-extrabold tracking-widest text-white">OPCIEAS</p>
                 <p className="font-sub text-[10px] tracking-[0.2em] text-gold">PVT. LTD.</p>
@@ -72,7 +76,7 @@ export default function Footer() {
             {/* Social */}
             <div className="mt-6 flex gap-3">
               {['in', 'f', 'X', 'ig', 'yt'].map((s) => (
-                <a key={s} href="#" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 font-sub text-xs text-white/70 transition hover:border-gold hover:bg-gold hover:text-navy">{s}</a>
+                <a key={s} href="/" className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 font-sub text-xs text-white/70 transition hover:border-gold hover:bg-gold hover:text-navy">{s}</a>
               ))}
             </div>
           </div>
@@ -96,16 +100,16 @@ export default function Footer() {
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/10 py-8 sm:flex-row">
           <p className="font-body text-xs text-white/40">© 2025 OPCIEAS Pvt. Ltd. All rights reserved.</p>
           <div className="flex gap-6">
-            <a href="#" className="font-body text-xs text-white/40 transition hover:text-white">Privacy Policy</a>
-            <a href="#" className="font-body text-xs text-white/40 transition hover:text-white">Terms</a>
-            <a href="#" className="font-body text-xs text-white/40 transition hover:text-white">Sitemap</a>
+            <a href="/privacy-policy" className="font-body text-xs text-white/40 transition hover:text-white">Privacy Policy</a>
+            <a href="/terms-of-use" className="font-body text-xs text-white/40 transition hover:text-white">Terms</a>
+            <a href="/" className="font-body text-xs text-white/40 transition hover:text-white">Sitemap</a>
           </div>
         </div>
       </div>
 
       {/* Back to top */}
       <motion.a
-        href="#hero"
+        href="/"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}

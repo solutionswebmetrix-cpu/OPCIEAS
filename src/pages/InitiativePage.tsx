@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link, useParams } from 'react-router-dom';
-import { ArrowRight, Building2, Factory, Sprout, HeartHandshake, Send } from 'lucide-react';
+import { ArrowRight, Building2, Factory } from 'lucide-react';
 import SectionBanner from '../components/SectionBanner';
 import InquiryForm from '../components/InquiryForm';
 import PageMeta from '../components/PageMeta';

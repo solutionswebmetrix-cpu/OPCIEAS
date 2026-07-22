@@ -6,14 +6,14 @@ export default function WhatsAppButton() {
   const [open, setOpen] = useState(false);
 
   const actions = [
-    'Instant Quote',
     'Product Inquiry',
     'Catalogue Request',
     'Export Inquiry',
     'Tender Inquiry',
+    'Dealer / Distributor',
   ];
 
-  const waLink = (msg: string) => `https://wa.me/919876543210?text=${encodeURIComponent(msg)}`;
+  const waLink = (msg: string) => `https://wa.me/919845579049?text=${encodeURIComponent(msg)}`;
 
   return (
     <>

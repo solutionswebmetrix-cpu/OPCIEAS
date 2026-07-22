@@ -59,8 +59,8 @@ export default function GovernmentTender() {
           viewport={{ once: true }}
           className="mt-12 flex flex-wrap justify-center gap-4"
         >
-          <a href="#rfq" className="btn-gold rounded-full px-6 py-3 font-sub text-sm">Submit Tender Inquiry</a>
-          <a href="#catalogue" className="btn-ghost rounded-full px-6 py-3 font-sub text-sm">Download Tender Catalogue</a>
+          <a href="/rfq" className="btn-gold rounded-full px-6 py-3 font-sub text-sm">Submit Tender Inquiry</a>
+          <a href="/products" className="btn-ghost rounded-full px-6 py-3 font-sub text-sm">Download Tender Catalogue</a>
         </motion.div>
       </div>
     </section>

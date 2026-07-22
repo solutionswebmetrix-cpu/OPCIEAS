@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Search, Download, MessageCircle, ArrowRight } from 'lucide-react';
+import PageMeta from '../components/PageMeta';
 import SectionBanner from '../components/SectionBanner';
 import ProductCard from '../components/ProductCard';
+import { IMG } from '../lib/images';
 import { fetchCategories, fetchProducts, type Category, type Product } from '../lib/data';
 
 export default function AllProductsPage() {
@@ -32,7 +34,14 @@ export default function AllProductsPage() {
 
   return (
     <>
-      <SectionBanner title="All Products" tagline="1000+ commercial furniture solutions" image="https://images.pexels.com/photos/7750129/pexels-photo-7750129.jpeg?auto=compress&cs=tinysrgb&w=1600" crumb="Products" crumbTo="/products" />
+      <PageMeta
+        title="All Products | OPCIEAS"
+        description="Browse OPCIEAS product categories for premium office furniture, industrial storage, educational furniture, stainless steel solutions and more."
+        keywords="commercial furniture, office furniture, industrial storage, educational furniture, stainless steel racks, bathroom storage, hostel furniture, premium seating"
+        canonical="https://www.opcieascommercialfurniture.com/products"
+        schema={{ '@context': 'https://schema.org', '@type': 'ItemList', name: 'OPCIEAS Products', description: 'Product categories and commercial furniture solutions from OPCIEAS.' }}
+      />
+      <SectionBanner title="All Products" tagline="1000+ commercial furniture solutions" image={IMG.heroBg} crumb="Products" crumbTo="/products" />
 
       {/* Category grid */}
       <section className="bg-white py-20">
@@ -84,7 +93,7 @@ export default function AllProductsPage() {
 
           <div className="mt-12 flex flex-wrap justify-center gap-4">
             <Link to="/rfq" className="btn-ghost flex items-center gap-2 rounded-full px-6 py-3 font-sub text-sm text-navy"><Download className="h-4 w-4" /> Download Catalogue</Link>
-            <a href="https://wa.me/919999999999" target="_blank" rel="noreferrer" className="flex items-center gap-2 rounded-full bg-[#25D366] px-6 py-3 font-sub text-sm text-white"><MessageCircle className="h-4 w-4" /> WhatsApp Inquiry</a>
+            <a href="https://wa.me/919845579049" target="_blank" rel="noreferrer" className="flex items-center gap-2 rounded-full bg-[#25D366] px-6 py-3 font-sub text-sm text-white"><MessageCircle className="h-4 w-4" /> WhatsApp Inquiry</a>
           </div>
         </div>
       </section>
